@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
-const CAL_LINK = 'https://cal.com/your-link'
+const CAL_LINK = 'https://cal.com/hassan-hai-jegppt/30min'
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
