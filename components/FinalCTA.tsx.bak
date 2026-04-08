@@ -1,4 +1,4 @@
-const CAL_LINK = 'https://cal.com/hassan-hai-jegppt/30min'
+const CAL_LINK = 'https://cal.com/your-link'
 
 export default function FinalCTA() {
   return (

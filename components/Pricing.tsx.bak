@@ -1,4 +1,4 @@
-const CAL_LINK = 'https://cal.com/hassan-hai-jegppt/30min' // TODO: replace with your Cal.com link
+const CAL_LINK = 'https://cal.com/your-link' // TODO: replace with your Cal.com link
 
 const plans = [
   {
