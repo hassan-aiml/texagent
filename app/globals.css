@@ -1006,4 +1006,35 @@ body {
   /* Proof numbers */
   .proof-number { font-size: 28px; }
   .proof-label  { font-size: 15px; }
+
+  /* Mobile color boosts */
+  .proof-number { color: var(--coral); }
+
+  /* Teal section backgrounds on mobile */
+  .features { background: var(--white); }
+  .serve-section { background: var(--coral-light); }
+  .pricing-section { background: var(--coral-light); }
+
+  /* Thicker accent borders on cards */
+  .feature-card { border-left: 3px solid var(--coral); }
+  .pricing-card { border-left: 3px solid var(--coral); }
+  .pricing-card.popular { border-left: 3px solid var(--coral); }
+
+  /* Section tags bigger and more visible */
+  .section-tag { font-size: 13px; letter-spacing: 0.12em; }
+
+  /* Hero tag line color pop */
+  .hero-tag { font-size: 13px; }
+
+  /* Serve card stronger accent */
+  .serve-card { border-left-width: 6px; }
+
+  /* VS section — give "them" column a warmer bg */
+  .vs-col.them { background: var(--stone); }
+
+  /* Expansion cards more visible */
+  .expansion-card.live { background: rgba(255,255,255,0.09); border-color: rgba(13,124,110,0.4); }
+
+  /* Banner bigger on mobile */
+  .banner { font-size: 15px; padding: 13px 20px; }
 }
