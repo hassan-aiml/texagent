@@ -14,10 +14,10 @@ export default function FinalCTA() {
         exactly what it would look like for your business.
       </p>
       <div className="final-actions">
-      <a href="mailto:hassan@texagent.co" className="btn-outline-white">
-        Send us a message
-      </a>
-        <a href={CAL_LINK} className="btn-outline-white" target="_blank" rel="noopener noreferrer">
+        <a href={CAL_LINK} className="btn-white" target="_blank" rel="noopener noreferrer">
+          Book a free demo
+        </a>
+        <a href="mailto:hassan@texagent.co" className="btn-outline-white">
           Send us a message
         </a>
       </div>

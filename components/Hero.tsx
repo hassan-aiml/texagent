@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-slab" />
-      <div className="hero-slab-stripe" />
+      <div className="hero-slab-accent" />
       <div className="hero-dot hero-dot-1" />
       <div className="hero-dot hero-dot-2" />
       <div className="hero-content">
@@ -14,7 +14,7 @@ export default function Hero() {
         <h1>
           Your business books,
           <br />
-          <em>follows up,</em> and <em>reactivates</em>
+          follows up, and <em>reactivates</em>
           <br />
           while you work.
         </h1>
@@ -41,8 +41,8 @@ export default function Hero() {
             <span className="proof-label">Your time to go live</span>
           </div>
           <div className="proof-item">
-            <span className="proof-number">Personalized</span>
-            <span className="proof-label">Every message, AI assisted</span>
+            <span className="proof-number">AI-written</span>
+            <span className="proof-label">Every message, personalized</span>
           </div>
           <div className="proof-item">
             <span className="proof-number">No dev needed</span>
