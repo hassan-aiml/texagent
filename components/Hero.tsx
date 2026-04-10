@@ -7,8 +7,8 @@ export default function Hero() {
     <section className="hero">
       <div className="hero-slab" />
       <div className="hero-slab-stripe" />
-      <div className="hero-glow" />
-      <div className="hero-dot" />
+      <div className="hero-dot hero-dot-1" />
+      <div className="hero-dot hero-dot-2" />
       <div className="hero-content">
         <div className="hero-tag">AI automation for local service businesses</div>
         <h1>

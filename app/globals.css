@@ -186,23 +186,21 @@ body {
   z-index: 1;
   clip-path: polygon(14% 0, 100% 0, 100% 100%, 13.4% 100%);
 }
-.hero-glow {
+.hero-dot {
   position: absolute;
-  width: 500px; height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,74,34,0.08) 0%, transparent 65%);
-  bottom: -140px; left: -120px;
   z-index: 0;
   pointer-events: none;
 }
-.hero-dot {
-  position: absolute;
-  width: 260px; height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(26,23,96,0.06) 0%, transparent 70%);
-  top: 60px; left: 40px;
-  z-index: 0;
-  pointer-events: none;
+.hero-dot-1 {
+  width: 320px; height: 320px;
+  background: rgba(201,170,111,0.1);
+  top: -80px; left: -80px;
+}
+.hero-dot-2 {
+  width: 180px; height: 180px;
+  background: rgba(13,124,110,0.12);
+  bottom: 120px; left: 380px;
 }
 .hero-content { position: relative; z-index: 2; }
 .hero-tag {
