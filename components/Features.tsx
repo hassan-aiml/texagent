@@ -20,10 +20,10 @@ export default function Features() {
         </div>
         <div className="feature-card">
           <div className="feature-icon">✉️</div>
-          <div className="feature-title">AI-written messages</div>
+          <div className="feature-title">Messages that feel human</div>
           <div className="feature-desc">
-            Confirmations, reminders, follow-ups, and reactivation — all written
-            by AI based on the client's specific service. Not templates.
+            Tailored to each client's actual service - confirmations, reminders, follow-ups, and reactivation. 
+            Not copy-paste templates.
           </div>
         </div>
         <div className="feature-card">

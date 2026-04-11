@@ -19,8 +19,8 @@ export default function Hero() {
           while you work.
         </h1>
         <p className="hero-sub">
-          We build and run a fully automated booking and customer communication
-          system — configured for your spa, salon, or service business. You focus
+          We build and run a booking system with personalized messages, sent automatically
+           — configured for your spa, salon, or service business. You focus
           on the service. We handle the rest.
         </p>
         <div className="hero-actions">
