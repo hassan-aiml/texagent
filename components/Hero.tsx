@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-slab" />
-      <div className="hero-slab-accent" />
+      <div className="hero-slab-stripe" />
       <div className="hero-dot hero-dot-1" />
       <div className="hero-dot hero-dot-2" />
       <div className="hero-content">
@@ -14,13 +14,13 @@ export default function Hero() {
         <h1>
           Your business books,
           <br />
-          follows up, and <em>reactivates</em>
+          <em>follows up,</em> and <em>reactivates</em>
           <br />
           while you work.
         </h1>
         <p className="hero-sub">
-          We build and run a booking system with personalized messages, sent automatically
-           — configured for your spa, salon, or service business. You focus
+          We build and run a fully automated booking and customer communication
+          system — configured for your spa, salon, or service business. You focus
           on the service. We handle the rest.
         </p>
         <div className="hero-actions">
@@ -41,8 +41,8 @@ export default function Hero() {
             <span className="proof-label">Your time to go live</span>
           </div>
           <div className="proof-item">
-            <span className="proof-number">AI-written</span>
-            <span className="proof-label">Every message, personalized</span>
+            <span className="proof-number">Personalized</span>
+            <span className="proof-label">Every message, AI assisted</span>
           </div>
           <div className="proof-item">
             <span className="proof-number">No dev needed</span>
