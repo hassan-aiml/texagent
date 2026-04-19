@@ -38,7 +38,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 }
 .nav-logo{text-decoration:none;display:flex;align-items:baseline;gap:2px}
 .logo-tex{font-family:var(--serif);font-size:22px;color:var(--black);letter-spacing:-0.02em;line-height:1}
-.logo-agent{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--black);letter-spacing:0.18em;margin-bottom:1px}
+.logo-agent{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--teal);letter-spacing:0.18em;margin-bottom:1px}
 .nav-right{display:flex;align-items:center;gap:1.25rem}
 .nav-phone{
   font-size:13.5px;font-weight:500;color:var(--dark-mid);
@@ -46,6 +46,10 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
   transition:color .15s;display:flex;align-items:center;gap:.35rem;
 }
 .nav-phone:hover{color:var(--teal)}
+.nav-phone-mobile{
+  display:none;font-size:14px;font-weight:600;color:var(--teal);
+  text-decoration:none;white-space:nowrap;
+}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
 .nav-links a{font-size:14px;color:var(--dark-mid);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--black)}
@@ -95,6 +99,14 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
   transition:background .2s;
 }
 .drawer-cta:hover{background:var(--teal-dark)}
+.drawer-call{
+  display:block;margin-top:1rem;
+  background:transparent;color:rgba(255,255,255,.7);text-align:center;
+  padding:1rem 1.5rem;border-radius:100px;
+  font-size:1rem;font-weight:400;text-decoration:none;
+  border:1px solid rgba(255,255,255,.15);transition:all .2s;
+}
+.drawer-call:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 
 /* ── INDUSTRY BAR ── */
 .ind-bar{
@@ -118,10 +130,28 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 .ind-pill:hover{background:rgba(192,84,42,.25)}
 
 /* ── HERO ── */
+.hero-wrap{
+  background:linear-gradient(135deg,#f9f8f5 0%,#f4ede3 45%,#ede0d4 100%);
+  border-bottom:1px solid var(--stone);
+  position:relative;overflow:hidden;
+}
+.hero-wrap::before{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,84,42,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-wrap::after{
+  content:'';position:absolute;bottom:-60px;left:-40px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,84,42,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
 .hero{
   padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,4vw,3.25rem) clamp(2.5rem,6vw,5rem);
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;
+  position:relative;z-index:1;
 }
 @media(max-width:820px){.hero{grid-template-columns:1fr;gap:2.5rem}}
 
@@ -136,14 +166,14 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 
 h1{
   font-family:var(--serif);
-  font-size:clamp(2.6rem,5.5vw,4.2rem);
-  line-height:1.04;letter-spacing:-0.025em;
+  font-size:clamp(3rem,6vw,4.8rem);
+  line-height:1.02;letter-spacing:-0.03em;
   color:var(--black);margin-bottom:1.25rem;
 }
 h1 em{font-style:italic;color:var(--teal)}
 
 .hero-sub{
-  font-size:1.05rem;font-weight:300;color:var(--dark-mid);
+  font-size:1.15rem;font-weight:300;color:var(--dark-mid);
   max-width:480px;line-height:1.75;margin-bottom:2rem;
 }
 .hero-sub strong{color:var(--black);font-weight:500}
@@ -180,9 +210,9 @@ h1 em{font-style:italic;color:var(--teal)}
 
 .hero-proof{
   display:flex;gap:0;padding-top:2rem;margin-top:2rem;
-  border-top:1px solid var(--stone);flex-wrap:wrap;
+  border-top:1px solid var(--stone);flex-wrap:nowrap;
 }
-.proof-item{display:flex;flex-direction:column;gap:2px;padding-right:2rem;margin-right:2rem;border-right:1px solid var(--stone)}
+.proof-item{display:flex;flex-direction:column;gap:2px;padding-right:1.5rem;margin-right:1.5rem;border-right:1px solid var(--stone);flex-shrink:0}
 .proof-item:last-child{border-right:none;padding-right:0;margin-right:0}
 .proof-num{font-family:var(--serif);font-size:1.75rem;color:var(--black);line-height:1;letter-spacing:-0.01em}
 .proof-label{font-size:.68rem;color:var(--mid);line-height:1.4}
@@ -655,44 +685,49 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   .nav-links{display:none}
   .hamburger{display:flex}
   .nav-phone{display:none}
+  .nav-cta{display:none}
+  .nav-phone-mobile{display:flex;align-items:center;gap:.35rem}
 }
 @media(max-width:640px){
-  .hero-proof{gap:1.5rem}
-  .proof-item{border-right:none;padding-right:0;margin-right:0;margin-bottom:1rem}
+  .hero-proof{gap:0}
+  .proof-item{padding-right:1.1rem;margin-right:1.1rem}
+  .proof-num{font-size:1.55rem}
   .price-card{padding:1.75rem}
   .hero-cta-row{flex-direction:column;align-items:stretch}
   .hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{text-align:center}
   /* 50% larger fonts on mobile */
   body{font-size:18px}
-  h1{font-size:clamp(2.6rem,11vw,3.8rem)}
-  .hero-sub{font-size:1.2rem}
-  .hero-eyebrow{font-size:.9rem}
-  .btn-primary,.btn-secondary,.nav-cta{font-size:1.05rem;padding:1rem 1.75rem}
+  h1{font-size:clamp(2.8rem,12vw,4rem);line-height:1.03}
+  .hero-sub{font-size:1.25rem}
+  .hero-eyebrow{font-size:.95rem}
+  .btn-primary,.btn-secondary,.nav-cta{font-size:1.1rem;padding:1.05rem 1.85rem}
   .speed-headline{font-size:1.05rem}
   .speed-sub{font-size:.88rem}
-  .cta-micro,.demo-micro{font-size:.85rem}
-  .proof-num{font-size:2rem}
-  .proof-label{font-size:.85rem}
-  .step-title{font-size:1.1rem}
-  .step-desc{font-size:.95rem}
-  .feat-title{font-size:1.05rem}
-  .feat-desc{font-size:.92rem}
-  .loss-title{font-size:1rem}
-  .loss-desc{font-size:.9rem}
+  .cta-micro,.demo-micro{font-size:.88rem}
+  .proof-label{font-size:.82rem}
+  .step-title{font-size:1.15rem}
+  .step-desc{font-size:1rem}
+  .feat-title{font-size:1.1rem}
+  .feat-desc{font-size:.95rem}
+  .loss-title{font-size:1.05rem}
+  .loss-desc{font-size:.92rem}
   .math-label,.math-val{font-size:1rem}
   .roi-row{font-size:1rem}
   .price-name{font-size:1.85rem}
-  .price-tagline{font-size:.95rem}
+  .price-tagline{font-size:.98rem}
   .price-dollar{font-size:3.75rem}
   .price-features li{font-size:1rem}
-  .trust-title{font-size:1rem}
-  .trust-desc{font-size:.9rem}
-  .section-tag{font-size:.82rem}
-  .problem-left p{font-size:1.05rem}
+  .trust-title{font-size:1.05rem}
+  .trust-desc{font-size:.92rem}
+  .section-tag{font-size:.85rem}
+  .problem-left p{font-size:1.08rem}
   .gut p{font-size:1.1rem}
   .final-cta p{font-size:1.1rem}
-  .ind-pill{font-size:.9rem}
-  .footer-phone{font-size:.9rem}
+  .ind-pill{font-size:.88rem}
+  .footer-phone{font-size:.92rem}
+  .section-h2,.problem-left h2,.how h2,.features h2,.numbers h2,.pricing h2,.final-cta h2{
+    font-size:clamp(1.9rem,8vw,2.4rem);
+  }
 }
 </style>
 </head>
@@ -706,8 +741,9 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
       <li><a href="#how-it-works">How it works</a></li>
       <li><a href="#pricing">Pricing</a></li>
     </ul>
-    <a href="tel:+15122600825" class="nav-phone">📞 (512) 260-0825</a>
-    <a href="#" class="nav-cta" onclick="openModal(event)">Calculate my lost revenue</a>
+    <a href="tel:+15127432520" class="nav-phone">📞 (512) 743-2520</a>
+    <a href="tel:+15127432520" class="nav-phone-mobile">📞 (512) 743-2520</a>
+    <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="nav-cta">Book a demo</a>
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleDrawer()">
       <span></span><span></span><span></span>
     </button>
@@ -718,7 +754,9 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <div class="drawer" id="drawer">
   <a href="#how-it-works" class="drawer-link" onclick="closeDrawer()">How it works</a>
   <a href="#pricing" class="drawer-link" onclick="closeDrawer()">Pricing</a>
-  <a href="#" class="drawer-cta" onclick="closeDrawer();openModal(event)">Calculate my lost revenue →</a>
+  <a href="tel:+15127432520" class="drawer-link" onclick="closeDrawer()">📞 Call (512) 743-2520</a>
+  <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="drawer-cta" onclick="closeDrawer()">Book a demo →</a>
+  <a href="#" class="drawer-call" onclick="closeDrawer();openModal(event)">Calculate my lost revenue</a>
 </div>
 
 <!-- INDUSTRY BAR -->
@@ -730,6 +768,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 </div>
 
 <!-- HERO -->
+<div class="hero-wrap">
 <section>
   <div class="hero">
     <div class="hero-left fade-up">
@@ -812,6 +851,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
     </div>
   </div>
 </section>
+</div><!-- /hero-wrap -->
 
 <!-- GUT PUNCH -->
 <div class="gut">
@@ -983,13 +1023,13 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
           • 2 jobs/month → you profit<br>
           • 3+ jobs/month → this becomes a no-brainer
         </div>
-        <button class="price-btn" onclick="openModal(event)">Start recovering missed calls →</button>
-        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank"
-           style="display:block;text-align:center;margin-top:.75rem;font-size:.85rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s"
-           onmouseover="this.style.color='rgba(255,255,255,.85)'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
-          Or book a demo instead →
-        </a>
-        <p style="font-size:.72rem;color:rgba(255,255,255,.35);text-align:center;margin-top:.75rem">Try it for 14 days. If it doesn&apos;t start conversations, don&apos;t pay.</p>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center">Book a 20-min demo →</a>
+        <button onclick="openModal(event)"
+           style="width:100%;background:transparent;border:none;cursor:pointer;font-family:var(--sans);padding:.65rem;margin-top:.5rem;font-size:.82rem;color:rgba(255,255,255,.4);transition:color .2s;text-align:center"
+           onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
+          Or calculate my lost revenue first
+        </button>
+        <p style="font-size:.72rem;color:rgba(255,255,255,.35);text-align:center;margin-top:.5rem">Try it for 14 days. If it doesn&apos;t start conversations, don&apos;t pay.</p>
       </div>
       <div class="trust-card fade-up" style="transition-delay:.1s">
         <div class="trust-item">
@@ -1049,7 +1089,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo"><span class="footer-tex">Tex</span><span class="footer-agent">AGENT</span></a>
-  <p class="footer-phone">Prefer to talk? Call or text: <a href="tel:+15122600825" style="color:var(--teal);text-decoration:none">(512) 260-0825</a></p>
+  <p class="footer-phone">Prefer to talk? Call or text: <a href="tel:+15127432520" style="color:var(--teal);text-decoration:none">(512) 743-2520</a></p>
   <p>© 2025 TexAgent · Austin, TX · hassan@texagent.co</p>
 </footer>
 
