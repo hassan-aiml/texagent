@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'TexAgent — AI Automation for Local Service Businesses',
+  title: 'TexAgent — Turn Missed Calls Into Booked Jobs',
   description:
-    'We build and run a fully automated booking and customer communication system for your spa, salon, or service business.',
+    'AI-powered missed call recovery for HVAC, plumbing, and electrical contractors. Responds in 30 seconds. Follows up automatically.',
 }
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ margin: 0, padding: 0, overflow: 'hidden' }}>{children}</body>
     </html>
   )
 }

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TexAgent — Turn Missed Calls Into Booked Jobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f9f8f5;--bg-card:#252932;--bg-card2:#1e222a;
+  --blue:#c0542a;--blue-hover:#a84522;--blue-dim:rgba(192,84,42,0.10);--blue-border:rgba(192,84,42,0.28);
+  --text:#1a1916;--text-muted:#5a5752;--text-dim:#9a9690;
+  --border:#eae8e2;--border2:#d8d5ce;
+  --green:#3a9e6a;--amber:#f59e0b;--red:#ef4444;--radius:10px;
+  --on-dark:#f0f2f6;--on-dark-muted:#c8cdd8;--on-dark-dim:#8e96a8;
+  --on-dark-border:rgba(255,255,255,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(249,248,245,0.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border2);padding:0 clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;height:58px}
+.nav-logo{font-size:1.1rem;font-weight:800;color:var(--text);letter-spacing:-0.02em}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--blue);color:#fff!important;padding:.45rem 1.15rem;border-radius:7px;font-size:.82rem!important;font-weight:700!important;transition:background .15s!important;box-shadow:0 0 0 1px rgba(192,84,42,.4)}
+.nav-cta:hover{background:var(--blue-hover)!important}
+
+/* INDUSTRY BADGE — louder, earlier */
+.industry-bar{background:var(--bg-card2);border-bottom:1px solid rgba(255,255,255,.08);padding:.65rem clamp(1rem,4vw,3rem);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.industry-bar-label{font-size:.72rem;font-weight:600;color:var(--on-dark-dim);letter-spacing:.04em;text-transform:uppercase}
+.industry-pills{display:flex;gap:.5rem;flex-wrap:wrap}
+.ind-pill{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--on-dark-muted);font-size:.78rem;font-weight:600;padding:.28rem .75rem;border-radius:100px}
+.ind-pill span{font-size:.85rem}
+
+/* HERO */
+.hero{padding:clamp(3.5rem,7vw,6.5rem) clamp(1rem,4vw,2.5rem) clamp(2.5rem,5vw,4.5rem);max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:780px){.hero{grid-template-columns:1fr}}
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-dim);border:1px solid var(--blue-border);color:#a84522;font-size:.72rem;font-weight:600;padding:.3rem .85rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+.hero-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;letter-spacing:-0.035em;line-height:1.1;margin-bottom:1.2rem}
+h1 em{font-style:normal;color:var(--blue)}
+.hero-sub{font-size:1.05rem;color:var(--text-muted);font-weight:400;line-height:1.7;margin-bottom:2rem}
+.hero-sub strong{color:var(--text);font-weight:600}
+
+/* SPEED BADGE — bold, icon-forward */
+.speed-badge{display:inline-flex;align-items:center;gap:.65rem;background:rgba(192,84,42,.08);border:1px solid rgba(192,84,42,.25);border-radius:8px;padding:.65rem 1rem;margin-bottom:1.75rem}
+.speed-icon{font-size:1.15rem;line-height:1}
+.speed-text{display:flex;flex-direction:column;gap:.05rem}
+.speed-headline{font-size:.9rem;font-weight:700;color:#a84522;line-height:1.2}
+.speed-sub{font-size:.72rem;color:rgba(168,69,34,.6);font-weight:400}
+
+.hero-cta-group{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;padding:.82rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif;letter-spacing:-.01em}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.15),0 0 0 1px rgba(192,84,42,.4),inset 0 1px 0 rgba(255,255,255,.1)}
+.btn-blue:hover{background:var(--blue-hover);transform:translateY(-1px);box-shadow:0 4px 12px rgba(192,84,42,.35)}
+.btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.cta-trust{font-size:.75rem;color:var(--text-dim);margin-top:.65rem}
+.hero-proof{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border)}
+.proof-item{display:flex;flex-direction:column}
+.proof-num{font-size:1.65rem;font-weight:800;color:var(--blue);letter-spacing:-0.03em}
+.proof-label{font-size:.72rem;color:var(--text-dim);margin-top:.1rem}
+
+/* PHONE + SMS VISUAL */
+.hero-visual{display:flex;flex-direction:column;gap:1rem;align-items:center}
+.phone-mockup{background:#2a2e38;border:2px solid #3a3f4e;border-radius:28px;width:220px;padding:1.25rem 1rem;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.phone-notch{width:60px;height:6px;background:#0d0d1a;border-radius:3px;margin:0 auto 1rem}
+.phone-header{text-align:center;margin-bottom:.85rem}
+.phone-time{font-size:.7rem;color:#8e96a8;margin-bottom:.1rem}
+.phone-missed-label{font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fca5a5}
+.missed-call-item{background:#363c4a;border-radius:10px;padding:.7rem .85rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;border:1px solid #4a5060}
+.mc-left{display:flex;align-items:center;gap:.55rem}
+.mc-avatar{width:32px;height:32px;border-radius:50%;background:#4a5060;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#c8cdd8;font-weight:700;flex-shrink:0}
+.mc-name{font-size:.8rem;font-weight:600;color:#d0d0f0}
+.mc-sub{font-size:.65rem;color:#8e96a8;margin-top:.05rem}
+.mc-badge{background:rgba(239,68,68,.2);color:#fca5a5;font-size:.62rem;font-weight:700;padding:.15rem .4rem;border-radius:4px;border:1px solid rgba(239,68,68,.3)}
+.phone-arrow{text-align:center;font-size:1.1rem;color:var(--blue);margin:.25rem 0}
+
+/* SMS THREAD */
+.sms-mockup{background:#2a2e38;border:1px solid #3a3f4e;border-radius:14px;width:220px;overflow:hidden}
+.sms-header{background:#22262f;padding:.6rem .85rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #3a3f4e}
+.sms-header-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+.sms-header-text{font-size:.7rem;font-weight:600;color:#8e96a8}
+.sms-body{padding:.75rem .85rem;display:flex;flex-direction:column;gap:.5rem}
+.sms-bubble{padding:.5rem .7rem;border-radius:10px;font-size:.72rem;line-height:1.4;max-width:85%}
+.sms-out{background:#a84522;color:#fff;align-self:flex-end;border-radius:10px 10px 2px 10px}
+.sms-in{background:#363c4a;color:#e8ecf2;align-self:flex-start;border-radius:10px 10px 10px 2px}
+.sms-time{font-size:.6rem;color:#8e96a8;text-align:right;margin-top:.15rem}
+
+/* INSIGHT section header overrides */
+.insight-section .section-tag{color:var(--on-dark-dim)}
+.insight-section .section-h2{color:var(--on-dark)}
+.insight-section .section-sub{color:var(--on-dark-muted)}
+/* NUMBERS section header overrides */
+.numbers-section .section-tag{color:var(--on-dark-dim)}
+.numbers-section .section-h2{color:var(--on-dark)}
+.numbers-section .section-sub{color:var(--on-dark-muted)}
+/* LAYERS (hiw) section - light background, use default text colors */
+.visual-connector{display:flex;align-items:center;gap:.5rem;padding:.5rem 0}
+.vc-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.vc-label{font-size:.65rem;font-weight:600;color:var(--blue);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+
+/* GUT PUNCH */
+.gut-punch{background:rgba(192,84,42,.07);border-top:1px solid rgba(192,84,42,.18);border-bottom:1px solid rgba(192,84,42,.18);padding:1.1rem clamp(1rem,4vw,2.5rem);text-align:center}
+.gut-punch-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap}
+.gut-punch-text{font-size:.95rem;font-weight:600;color:var(--text)}
+.gut-punch-text span{color:var(--blue)}
+
+/* SECTION SHARED */
+.section-tag{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+.section-h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:.85rem}
+.section-sub{color:var(--text-muted);font-size:.95rem;max-width:500px;line-height:1.7}
+
+/* INSIGHT */
+.insight-section{background:var(--bg-card);border-top:1px solid var(--on-dark-border);border-bottom:1px solid var(--on-dark-border);padding:4rem clamp(1rem,4vw,2.5rem)}
+.insight-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:680px){.insight-inner{grid-template-columns:1fr;gap:2rem}}
+.insight-body{color:var(--on-dark-muted);font-size:.925rem;line-height:1.75;margin-bottom:1.25rem}
+.insight-conclusion{color:var(--on-dark);font-size:.95rem;font-weight:500;line-height:1.65;padding:.9rem 1.1rem;border-left:3px solid var(--blue);background:rgba(192,84,42,.15);border-radius:0 6px 6px 0}
+.loss-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:1.1rem 1.25rem;display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.85rem}
+.loss-card:last-child{margin-bottom:0}
+.loss-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.loss-icon.red{background:rgba(239,68,68,.2)}
+.loss-icon.amber{background:rgba(245,158,11,.2)}
+.loss-icon.blue-i{background:rgba(192,84,42,.2)}
+.loss-title{font-size:.875rem;font-weight:600;margin-bottom:.2rem;color:var(--on-dark)}
+.loss-desc{font-size:.8rem;color:var(--on-dark-muted);line-height:1.5}
+
+/* LAYERS */
+.hiw-section{padding:5rem clamp(1rem,4vw,2.5rem);max-width:1080px;margin:0 auto;border-top:1px solid var(--border)}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2.75rem}
+.layer-card{background:var(--bg-card);border:1px solid var(--on-dark-border);border-radius:var(--radius);padding:1.75rem;transition:border-color .2s}
+.layer-card.featured{border-color:var(--blue-border);background:var(--bg-card)}
+.layer-num{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;margin-bottom:1rem}
+.layer-num.green{background:rgba(58,158,106,.25);color:#6ec48a}
+.layer-num.amber{background:rgba(245,158,11,.2);color:#f59e0b}
+.layer-num.red-c{background:rgba(192,84,42,.25);color:#e8835c}
+.layer-tag{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-dim);margin-bottom:.4rem}
+.layer-title{font-size:1.05rem;font-weight:700;margin-bottom:.65rem;color:var(--on-dark)}
+.layer-bullets{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.layer-bullets li{font-size:.85rem;color:var(--on-dark-muted);display:flex;gap:.6rem;align-items:flex-start;line-height:1.5}
+.layer-bullets li::before{content:'→';color:var(--blue);font-size:.75rem;margin-top:2px;flex-shrink:0}
+
+/* FLOW */
+.flow-section{padding:5rem clamp(1rem,4vw,2.5rem);max-width:1080px;margin:0 auto;border-top:1px solid var(--border)}
+.flow-steps{display:flex;flex-direction:column;gap:0;margin-top:2.75rem}
+.flow-step{display:grid;grid-template-columns:48px 1fr;gap:0 1.25rem;position:relative}
+.flow-step:not(:last-child)::after{content:'';position:absolute;left:23px;top:50px;bottom:-8px;width:1px;background:var(--border2)}
+.step-num{width:46px;height:46px;border-radius:50%;border:1px solid var(--blue-border);background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--blue);flex-shrink:0;z-index:1}
+.step-body{padding-bottom:2.75rem;position:relative;z-index:1}
+.step-label{font-size:.67rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.25rem}
+.step-title{font-size:1.05rem;font-weight:700;margin-bottom:.45rem;color:var(--text)}
+.step-title.lost{color:var(--red)}
+.step-title.saved{color:var(--green)}
+.step-desc{color:var(--text-muted);font-size:.875rem;line-height:1.65;max-width:520px}
+.step-chip{display:inline-block;font-size:.7rem;padding:.2rem .65rem;border-radius:4px;margin-top:.6rem;font-weight:500;position:relative;z-index:2}
+.step-chip.bad{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#e05555}
+.step-chip.good{background:rgba(58,158,106,.1);border:1px solid rgba(58,158,106,.2);color:#3a9e6a}
+
+/* NUMBERS */
+.numbers-section{background:var(--bg-card);border-top:1px solid var(--on-dark-border);border-bottom:1px solid var(--on-dark-border);padding:5rem clamp(1rem,4vw,2.5rem)}
+.numbers-inner{max-width:1080px;margin:0 auto}
+.numbers-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2.75rem;align-items:start}
+@media(max-width:680px){.numbers-grid{grid-template-columns:1fr}}
+.math-block{background:rgba(255,255,255,.05);border:1px solid var(--on-dark-border);border-radius:var(--radius);overflow:hidden}
+.math-header{padding:.75rem 1.25rem;background:rgba(192,84,42,.2);border-bottom:1px solid rgba(192,84,42,.3);font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#f0b8a0}
+.math-rows{display:flex;flex-direction:column}
+.math-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.25rem;border-bottom:1px solid var(--on-dark-border);font-size:.875rem}
+.math-row:last-child{border-bottom:none}
+.math-row.total{background:rgba(192,84,42,.1)}
+.math-label{color:var(--on-dark-muted)}
+.math-value{font-weight:700;color:var(--on-dark)}
+.math-value.red{color:#e8835c}
+.math-divider-row{padding:.5rem 1.25rem;background:rgba(255,255,255,.04);border-bottom:1px solid var(--on-dark-border)}
+.math-divider-label{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark-dim)}
+.recovery-block{display:flex;flex-direction:column;gap:1.1rem}
+.recovery-card{background:rgba(255,255,255,.05);border:1px solid var(--on-dark-border);border-radius:var(--radius);padding:1.25rem}
+.recovery-header{font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--on-dark-dim);margin-bottom:.75rem}
+.recovery-row{display:flex;justify-content:space-between;font-size:.875rem;padding:.3rem 0;border-bottom:1px solid var(--on-dark-border)}
+.recovery-row:last-child{border-bottom:none;padding-top:.6rem;margin-top:.2rem}
+.recovery-row.total .recovery-val{color:#6ec48a;font-weight:700}
+.recovery-desc{color:var(--on-dark-muted)}
+.recovery-val{color:var(--on-dark);font-weight:500}
+.numbers-reframe{margin-top:1.5rem;padding:1rem 1.25rem;border-left:3px solid var(--blue);background:rgba(192,84,42,.12);border-radius:0 6px 6px 0;font-size:.95rem;font-weight:600;color:var(--on-dark);line-height:1.5}
+.numbers-note{font-size:.75rem;color:var(--on-dark-dim);margin-top:1rem;line-height:1.6}
+
+/* COMPARE */
+.compare-section{padding:5rem clamp(1rem,4vw,2.5rem);max-width:1080px;margin:0 auto;border-top:1px solid var(--border)}
+.compare-table{width:100%;border-collapse:collapse;margin-top:2.75rem;font-size:.875rem}
+.compare-table th{padding:.85rem 1.25rem;text-align:left;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark-dim);border-bottom:1px solid var(--on-dark-border);background:var(--bg-card2)}
+.compare-table th:last-child{color:var(--blue)}
+.compare-table td{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top;line-height:1.5}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table tr:hover td{background:rgba(255,255,255,.02)}
+.c-no{color:var(--text-dim)}
+.c-yes{color:var(--green)}
+
+/* PRICING */
+.price-section{padding:5rem clamp(1rem,4vw,2.5rem);max-width:1080px;margin:0 auto;border-top:1px solid var(--border)}
+.price-intro{font-size:.9rem;color:#a84522;font-weight:500;background:rgba(192,84,42,.07);border:1px solid rgba(192,84,42,.2);border-radius:7px;padding:.75rem 1.1rem;display:inline-block;margin-bottom:2rem}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:.5rem}
+.price-card{background:var(--bg-card);border:1px solid var(--on-dark-border);border-radius:var(--radius);padding:1.75rem;display:flex;flex-direction:column}
+.price-card.pop{border-color:var(--blue);background:var(--bg-card)}
+.pop-tag{background:var(--blue);color:#fff;font-size:.62rem;font-weight:700;padding:.22rem .6rem;border-radius:100px;letter-spacing:.05em;text-transform:uppercase;display:inline-block;margin-bottom:.6rem}
+.price-tier{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-dim);margin-bottom:.3rem}
+.price-name{font-size:1.2rem;font-weight:800;margin-bottom:.25rem;color:var(--on-dark)}
+.price-tagline{font-size:.82rem;color:var(--on-dark-dim);margin-bottom:1.4rem;line-height:1.45}
+.price-row{display:flex;align-items:baseline;gap:.2rem;margin-bottom:.2rem}
+.price-dollar{font-size:2.25rem;font-weight:800;letter-spacing:-0.03em;color:var(--on-dark)}
+.price-mo{font-size:.85rem;color:var(--on-dark-dim)}
+.price-setup{font-size:.75rem;color:var(--on-dark-dim);margin-bottom:.75rem}
+.price-roi{font-size:.78rem;font-weight:500;color:#e8835c;background:rgba(192,84,42,.18);border:1px solid rgba(192,84,42,.3);padding:.35rem .75rem;border-radius:5px;display:inline-block;margin-bottom:1.1rem}
+.price-divider{border:none;border-top:1px solid var(--on-dark-border);margin:1.25rem 0}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;flex:1;margin-bottom:1.5rem}
+.price-features li{font-size:.84rem;color:var(--on-dark-muted);display:flex;gap:.6rem;align-items:flex-start}
+.pf-yes{color:#6ec48a;font-size:.75rem;margin-top:2px;flex-shrink:0}
+.pf-no{color:var(--on-dark-dim);font-size:.75rem;margin-top:2px;flex-shrink:0}
+.btn-price{width:100%;padding:.85rem;border-radius:8px;font-size:.84rem;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .15s;letter-spacing:-.01em}
+.btn-price-fill{background:var(--blue);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.15),0 0 0 1px rgba(192,84,42,.4)}
+.btn-price-fill:hover{background:var(--blue-hover);transform:translateY(-1px)}
+.btn-price-outline{background:rgba(255,255,255,.07);color:var(--on-dark-muted);border:1px solid var(--on-dark-border)}
+.btn-price-outline:hover{border-color:var(--blue);color:var(--on-dark);background:rgba(192,84,42,.12)}
+
+/* FOOTER CTA */
+.footer-cta{background:var(--bg-card);border:1px solid var(--on-dark-border);border-top:2px solid var(--blue);padding:clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,2.5rem);text-align:center;max-width:1080px;margin:5rem auto 3rem;border-radius:var(--radius)}
+.footer-cta h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:.75rem;color:var(--on-dark)}
+.footer-cta p{color:var(--on-dark-muted);font-size:.95rem;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+footer{border-top:1px solid var(--border);padding:1.75rem clamp(1rem,4vw,2.5rem);max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-size:.9rem;font-weight:800;color:var(--text-muted)}
+.footer-logo span{color:var(--blue)}
+footer p{font-size:.78rem;color:var(--text-dim)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,25,22,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border:1px solid var(--border2);border-radius:14px;width:100%;max-width:480px;padding:2rem;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);font-size:1.25rem;cursor:pointer;line-height:1;padding:.25rem}
+.modal-close:hover{color:var(--text)}
+.modal-step{display:none}
+.modal-step.active{display:block}
+.modal-step-tag{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.modal-h{font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:.4rem}
+.modal-sub{font-size:.875rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.78rem;font-weight:500;color:var(--text-muted);margin-bottom:.4rem}
+.form-input{width:100%;background:#fff;border:1px solid var(--border2);color:var(--text);padding:.65rem .85rem;border-radius:7px;font-size:.9rem;font-family:'Inter',sans-serif;transition:border-color .15s;outline:none}
+.form-input:focus{border-color:var(--blue)}
+.form-select{width:100%;background:#fff;border:1px solid var(--border2);color:var(--text);padding:.65rem .85rem;border-radius:7px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;cursor:pointer}
+.form-select:focus{border-color:var(--blue)}
+.modal-btn{width:100%;background:var(--blue);color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.5rem;transition:background .15s;box-shadow:0 0 0 1px rgba(192,84,42,.4)}
+.modal-btn:hover{background:var(--blue-hover)}
+.result-callout{background:rgba(192,84,42,.08);border:1px solid rgba(192,84,42,.25);border-radius:10px;padding:1.5rem;text-align:center;margin:1.25rem 0}
+.result-loss{font-size:2rem;font-weight:800;color:var(--blue);letter-spacing:-0.03em}
+.result-label{font-size:.82rem;color:var(--text-muted);margin-top:.3rem}
+.result-math{font-size:.78rem;color:var(--text-dim);margin-top:.6rem}
+.result-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin:1.25rem 0}
+.result-bullets li{font-size:.85rem;color:var(--text-muted);display:flex;gap:.6rem;align-items:flex-start}
+.result-bullets li::before{content:'✓';color:var(--green);flex-shrink:0}
+.btn-cal{width:100%;background:var(--blue);color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;text-decoration:none;display:block;text-align:center}
+.btn-cal:hover{background:var(--blue-hover)}
+.step-dots{display:flex;gap:.4rem;justify-content:center;margin-bottom:1.5rem}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--border2)}
+.step-dot.active{background:var(--blue)}
+
+@media(max-width:640px){.nav-links a:not(.nav-cta){display:none}.hero-proof{gap:1.5rem}.footer-cta{margin:3rem 1rem 2rem}.hero-visual{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tex<span>Agent</span></div>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#" class="nav-cta" onclick="openModal(event)">See how many jobs you're losing</a>
+  </div>
+</nav>
+
+<!-- INDUSTRY BAR — loud, early -->
+<div class="industry-bar">
+  <span class="industry-bar-label">Built for</span>
+  <div class="industry-pills">
+    <div class="ind-pill"><span>🔧</span> HVAC contractors</div>
+    <div class="ind-pill"><span>🪠</span> Plumbing contractors</div>
+    <div class="ind-pill"><span>⚡</span> Electrical contractors</div>
+  </div>
+</div>
+
+<!-- HERO — 2 column with SMS visual -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="hero-dot"></span>Revenue recovery for trade contractors</div>
+    <h1>Every missed call is a job<br>you're <em>not getting paid for.</em></h1>
+    <p class="hero-sub">Most HVAC businesses lose <strong>$2,000–$6,000/month</strong> from missed calls and slow follow-up.</p>
+
+    <!-- SPEED — bold, icon-forward -->
+    <div class="speed-badge">
+      <span class="speed-icon">⚡</span>
+      <div class="speed-text">
+        <span class="speed-headline">Responds in under 30 seconds</span>
+        <span class="speed-sub">While you're on a job — automatically</span>
+      </div>
+    </div>
+
+    <div class="hero-cta-group">
+      <button class="btn btn-blue" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+      <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+    </div>
+    <div class="cta-trust">Takes 30 seconds. No signup required.</div>
+    <div class="hero-proof">
+      <div class="proof-item"><span class="proof-num">30s</span><span class="proof-label">First text after missed call</span></div>
+      <div class="proof-item"><span class="proof-num">3×</span><span class="proof-label">Automated follow-up sequences</span></div>
+      <div class="proof-item"><span class="proof-num">24/7</span><span class="proof-label">Works while you're on the job</span></div>
+    </div>
+  </div>
+
+  <!-- SMS VISUAL -->
+  <div class="hero-visual">
+    <!-- Phone with missed calls -->
+    <div class="phone-mockup">
+      <div class="phone-notch"></div>
+      <div class="phone-header">
+        <div class="phone-time">9:47 AM</div>
+        <div class="phone-missed-label">3 missed calls</div>
+      </div>
+      <div class="missed-call-item">
+        <div class="mc-left">
+          <div class="mc-avatar">JB</div>
+          <div>
+            <div class="mc-name">John B.</div>
+            <div class="mc-sub">AC unit not working</div>
+          </div>
+        </div>
+        <div class="mc-badge">MISSED</div>
+      </div>
+      <div class="missed-call-item">
+        <div class="mc-left">
+          <div class="mc-avatar">SR</div>
+          <div>
+            <div class="mc-name">Sarah R.</div>
+            <div class="mc-sub">Pipe burst — urgent</div>
+          </div>
+        </div>
+        <div class="mc-badge">MISSED</div>
+      </div>
+    </div>
+
+    <!-- Arrow connector -->
+    <div class="visual-connector" style="width:220px">
+      <div class="vc-line"></div>
+      <div class="vc-label">⚡ TexAgent responds in 30s</div>
+      <div class="vc-line"></div>
+    </div>
+
+    <!-- SMS thread -->
+    <div class="sms-mockup">
+      <div class="sms-header">
+        <div class="sms-header-dot"></div>
+        <span class="sms-header-text">Text conversation — automated</span>
+      </div>
+      <div class="sms-body">
+        <div>
+          <div class="sms-bubble sms-out">Hi John — this is Austin HVAC Pro. Sorry we missed your call! What can we help you with?</div>
+          <div class="sms-time">Sent automatically · 9:47 AM</div>
+        </div>
+        <div>
+          <div class="sms-bubble sms-in">AC stopped working, house is 85°. Need someone today</div>
+          <div class="sms-time" style="text-align:left;color:#444">9:49 AM</div>
+        </div>
+        <div>
+          <div class="sms-bubble sms-out">Got it — we can have a tech out by 2pm. Does that work?</div>
+          <div class="sms-time">9:49 AM</div>
+        </div>
+        <div>
+          <div class="sms-bubble sms-in">Yes! That works perfectly</div>
+          <div class="sms-time" style="text-align:left;color:#444">9:50 AM</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.7rem;color:var(--green);font-weight:600;text-align:center;margin-top:.25rem">✓ Booked job — you were still on site</div>
+  </div>
+</div>
+
+<!-- GUT PUNCH BANNER -->
+<div class="gut-punch">
+  <div class="gut-punch-inner">
+    <span style="font-size:1rem">⚡</span>
+    <span class="gut-punch-text">If someone calls your business and doesn't get a response within a minute, <span>they call the next company.</span></span>
+  </div>
+</div>
+
+<!-- INSIGHT -->
+<div class="insight-section">
+  <div class="insight-inner">
+    <div>
+      <div class="section-tag">The real problem</div>
+      <h2 class="section-h2">Most service businesses don't lose calls — they lose follow-up</h2>
+      <p class="insight-body">You pick up when you can. But the calls that slip through — while you're on a job, after hours, on a Saturday morning — those don't come back on their own. And even when someone does reach you, if they don't book immediately and never hear from you again, that lead is gone.</p>
+      <p class="insight-body">Most owners know they're missing calls. What they don't see is how many of those callers would have booked if someone had just followed up.</p>
+      <div class="insight-conclusion">TexAgent automatically follows up on every missed opportunity — so you don't lose the job to the next contractor in Google's search results.</div>
+    </div>
+    <div>
+      <div class="loss-card">
+        <div class="loss-icon red">📵</div>
+        <div>
+          <div class="loss-title">Missed while you're on a job</div>
+          <div class="loss-desc">You're under a crawl space or on a roof. Customer calls, gets voicemail, hangs up. By the time you check messages they've already called the next contractor.</div>
+        </div>
+      </div>
+      <div class="loss-card">
+        <div class="loss-icon amber">🌙</div>
+        <div>
+          <div class="loss-title">After-hours and weekend calls</div>
+          <div class="loss-desc">AC goes out Friday evening. They call you, then call a competitor. Whoever responds first gets the booked job. Right now, that's not you.</div>
+        </div>
+      </div>
+      <div class="loss-card">
+        <div class="loss-icon blue-i">🔕</div>
+        <div>
+          <div class="loss-title">Leads that never got a second message</div>
+          <div class="loss-desc">They showed interest, said they'd think about it. You meant to follow up. Busy happened. That lead is now someone else's booked job.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYERS -->
+<section class="hiw-section" id="how-it-works">
+  <div class="section-tag">The system</div>
+  <h2 class="section-h2">Three layers of revenue recovery</h2>
+  <p class="section-sub">Most businesses only have layer one — and even that's manual. TexAgent runs all three automatically.</p>
+  <div class="layers">
+    <div class="layer-card">
+      <div class="layer-num green">01</div>
+      <div class="layer-tag">Core · Always active</div>
+      <div class="layer-title">Missed Call Text Back</div>
+      <ul class="layer-bullets">
+        <li>SMS fires within 10–30 seconds of a missed call</li>
+        <li>Asks what service they need</li>
+        <li>Captures job type, urgency, and location</li>
+        <li>Lead stored in your dashboard instantly</li>
+      </ul>
+    </div>
+    <div class="layer-card featured">
+      <div class="layer-num amber">02</div>
+      <div class="layer-tag">Growth · For unbooked leads</div>
+      <div class="layer-title">Follow-up & Reactivation Engine</div>
+      <ul class="layer-bullets">
+        <li>24-hour follow-up if no booking after the job</li>
+        <li>7-day check-in message</li>
+        <li>30-day reactivation for cold leads</li>
+        <li>Converts "I'll think about it" into booked jobs</li>
+      </ul>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num red-c">03</div>
+      <div class="layer-tag">Premium · 24/7 coverage</div>
+      <div class="layer-title">Never miss a call — even after hours or during busy times</div>
+      <ul class="layer-bullets">
+        <li>AI answers calls when you can't get to the phone</li>
+        <li>Collects job details via natural voice conversation</li>
+        <li>Books directly into your calendar system</li>
+        <li>Your business keeps taking jobs while you sleep</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="flow-section">
+  <div class="section-tag">How it works</div>
+  <h2 class="section-h2">From missed call to booked job — automatically</h2>
+  <p class="section-sub">Every step that used to mean a lost job now becomes a recovered one.</p>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-label">The moment it happens</div>
+        <div class="step-title lost">Customer calls — you're busy on a job and miss it</div>
+        <div class="step-desc">You're focused on the work in front of you. The phone rings. You can't get to it. That caller waits a few seconds, then searches for the next contractor.</div>
+        <span class="step-chip bad">They move on to your competitor if no one responds</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-label">Instant response — under 30 seconds</div>
+        <div class="step-title saved">TexAgent responds instantly — before they call anyone else</div>
+        <div class="step-desc">"Hi, this is [Your Business]. Sorry we missed your call — what service do you need help with?" You're still on the job. TexAgent has already opened a conversation and kept the lead alive.</div>
+        <span class="step-chip good">Booked job recovered — no action needed from you</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-label">Lead captured</div>
+        <div class="step-title">Job details collected and stored automatically</div>
+        <div class="step-desc">They reply with service type, urgency, and location. Structured lead data logged in your dashboard instantly. You finish your current job, check your phone, and the lead is already there.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-label">If they don't book right away</div>
+        <div class="step-title lost">They go quiet — most contractors give up here</div>
+        <div class="step-desc">Without a follow-up system, "I'll think about it" always means a lost job. You're too busy to remember, and the moment passes.</div>
+        <span class="step-chip bad">Most competitors stop following up after 24 hours</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-label">TexAgent keeps going</div>
+        <div class="step-title saved">Automated follow-up runs at 24h, 7 days, and 30 days</div>
+        <div class="step-desc">Tailored check-ins fire automatically until they book or go cold. Most dead leads just needed one more message at the right time.</div>
+        <span class="step-chip good">Booked job recovered — zero extra effort from you</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers-section">
+  <div class="numbers-inner">
+    <div class="section-tag">What this means in real numbers</div>
+    <h2 class="section-h2">The math most contractors never look at</h2>
+    <p class="section-sub">Run the numbers on what your missed calls actually cost — and what a recovery system returns.</p>
+    <div class="numbers-grid">
+      <div>
+        <div class="math-block">
+          <div class="math-header">What you're losing right now</div>
+          <div class="math-rows">
+            <div class="math-row"><span class="math-label">Missed calls per day</span><span class="math-value">3–5 calls</span></div>
+            <div class="math-row"><span class="math-label">Working days per month</span><span class="math-value">22 days</span></div>
+            <div class="math-row"><span class="math-label">Missed calls per month</span><span class="math-value">66–110 calls</span></div>
+            <div class="math-divider-row"><span class="math-divider-label">Conservative — 20% would have booked</span></div>
+            <div class="math-row"><span class="math-label">Lost booked jobs per month</span><span class="math-value">13–22 jobs</span></div>
+            <div class="math-row"><span class="math-label">Average job value (HVAC/Plumbing)</span><span class="math-value">$450–$750</span></div>
+            <div class="math-row total"><span class="math-label" style="font-weight:600;color:var(--on-dark)">Revenue lost per month</span><span class="math-value red">$5,850–$16,500</span></div>
+          </div>
+        </div>
+        <div class="numbers-reframe">This isn't a marketing problem — it's a follow-up problem.</div>
+        <p class="numbers-note">Based on industry averages for trade contractors in Austin. Use the calculator to see your specific numbers.</p>
+      </div>
+      <div class="recovery-block">
+        <div class="recovery-card">
+          <div class="recovery-header">What TexAgent recovers (conservative)</div>
+          <div class="recovery-row"><span class="recovery-desc">Calls converted by instant text back</span><span class="recovery-val">40–60%</span></div>
+          <div class="recovery-row"><span class="recovery-desc">Additional jobs from follow-up sequences</span><span class="recovery-val">+15–25%</span></div>
+          <div class="recovery-row"><span class="recovery-desc">Jobs from 30-day reactivation</span><span class="recovery-val">+5–10%</span></div>
+          <div class="recovery-row total"><span class="recovery-desc" style="font-weight:600;color:var(--on-dark)">Est. monthly revenue recovered</span><span class="recovery-val">$2,600–$9,900</span></div>
+        </div>
+        <div class="recovery-card" style="border-color:rgba(192,84,42,.35);background:rgba(192,84,42,.15)">
+          <div class="recovery-header" style="color:#e8835c">Cost vs. recovery</div>
+          <div class="recovery-row"><span class="recovery-desc">TexAgent Growth plan</span><span class="recovery-val">$397/mo</span></div>
+          <div class="recovery-row"><span class="recovery-desc">Conservative monthly recovery</span><span class="recovery-val">$2,600+</span></div>
+          <div class="recovery-row total"><span class="recovery-desc" style="font-weight:600;color:var(--on-dark)">Net return</span><span class="recovery-val" style="color:#6ec48a;font-weight:700">6–25× ROI</span></div>
+        </div>
+        <button class="btn btn-blue" style="width:100%;padding:.85rem;font-size:.9rem" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARE -->
+<section class="compare-section">
+  <div class="section-tag">Why TexAgent</div>
+  <h2 class="section-h2">What you're doing now vs. what you could have</h2>
+  <p class="section-sub">Manual follow-up gets forgotten when you're busiest — which is exactly when you need it most.</p>
+  <table class="compare-table">
+    <thead><tr><th>Situation</th><th>Without TexAgent</th><th>With TexAgent</th></tr></thead>
+    <tbody>
+      <tr><td>Missed call while on a job</td><td class="c-no">Caller searches your competitor — booked job gone</td><td class="c-yes">Text back in 30 seconds, lead captured</td></tr>
+      <tr><td>Lead says "I'll think about it"</td><td class="c-no">You forget, lead goes cold</td><td class="c-yes">24h / 7d / 30d follow-up fires automatically</td></tr>
+      <tr><td>After-hours or weekend call</td><td class="c-no">Voicemail nobody listens to</td><td class="c-yes">SMS conversation starts immediately</td></tr>
+      <tr><td>Old leads from 3 weeks ago</td><td class="c-no">Forgotten — no system to reactivate</td><td class="c-yes">30-day reactivation fires automatically</td></tr>
+      <tr><td>Busy season — high call volume</td><td class="c-no">Calls fall through, revenue lost invisibly</td><td class="c-yes">Every missed call tracked and followed up</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRICING -->
+<section class="price-section" id="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2 class="section-h2">Simple pricing. No contracts.</h2>
+  <div class="price-intro">If you're missing even 3–5 calls per week, this pays for itself almost immediately.</div>
+  <div class="price-grid">
+    <div class="price-card pop">
+      <div class="pop-tag">Start here</div>
+      <div class="price-tier">Starter</div>
+      <div class="price-name">Text Back</div>
+      <div class="price-tagline">Stop losing missed calls while you're on the job</div>
+      <div class="price-row"><span class="price-dollar">$197</span><span class="price-mo">/mo</span></div>
+      <div class="price-setup">+ $497 one-time setup</div>
+      <div class="price-roi">Pays for itself with just 1–2 recovered jobs</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="pf-yes">✓</span> SMS within 30 seconds of missed call</li>
+        <li><span class="pf-yes">✓</span> Captures job type, urgency & location</li>
+        <li><span class="pf-yes">✓</span> Lead dashboard</li>
+        <li><span class="pf-yes">✓</span> Up to 200 leads/month</li>
+        <li><span class="pf-no">–</span> Follow-up sequences</li>
+        <li><span class="pf-no">–</span> AI voice agent</li>
+      </ul>
+      <button class="btn-price btn-price-fill" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Growth</div>
+      <div class="price-name">Follow-up Pro</div>
+      <div class="price-tagline">Recover leads that didn't book after hours or on the job</div>
+      <div class="price-row"><span class="price-dollar">$397</span><span class="price-mo">/mo</span></div>
+      <div class="price-setup">+ $697 one-time setup</div>
+      <div class="price-roi">Recovers leads that would normally be lost forever</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="pf-yes">✓</span> Everything in Starter</li>
+        <li><span class="pf-yes">✓</span> 24-hour follow-up SMS</li>
+        <li><span class="pf-yes">✓</span> 7-day check-in message</li>
+        <li><span class="pf-yes">✓</span> 30-day reactivation campaign</li>
+        <li><span class="pf-yes">✓</span> Unlimited leads</li>
+        <li><span class="pf-no">–</span> AI voice agent</li>
+      </ul>
+      <button class="btn-price btn-price-outline" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Premium</div>
+      <div class="price-name">Voice + AI</div>
+      <div class="price-tagline">Never miss a call — even after hours or during busy times</div>
+      <div class="price-row"><span class="price-dollar">$697</span><span class="price-mo">/mo</span></div>
+      <div class="price-setup">+ $1,497 one-time setup</div>
+      <div class="price-roi">Captures booked jobs even when you're completely unavailable</div>
+      <hr class="price-divider">
+      <ul class="price-features">
+        <li><span class="pf-yes">✓</span> Everything in Growth</li>
+        <li><span class="pf-yes">✓</span> AI answers inbound calls 24/7</li>
+        <li><span class="pf-yes">✓</span> Books directly into your calendar</li>
+        <li><span class="pf-yes">✓</span> Custom voice scripts per job type</li>
+        <li><span class="pf-yes">✓</span> Priority support + monthly review</li>
+      </ul>
+      <button class="btn-price btn-price-outline" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <h2>You're already losing jobs every week — you just don't see them.</h2>
+  <p>TexAgent makes sure every missed call gets a second chance. Find out exactly how many jobs you're losing — takes 30 seconds.</p>
+  <button class="btn btn-blue" style="font-size:1rem;padding:.9rem 2.25rem" onclick="openModal(event)">See how many jobs you're losing this month →</button>
+</div>
+
+<footer>
+  <div class="footer-logo">Tex<span>Agent</span></div>
+  <p>© 2025 TexAgent · Austin, TX · hassan@texagent.co</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-step active" id="step1">
+      <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div>
+      <div class="modal-step-tag">Step 1 of 2</div>
+      <div class="modal-h">Tell us about your call volume</div>
+      <div class="modal-sub">We'll show you exactly how many booked jobs you're likely losing every month.</div>
+      <div class="form-group"><label class="form-label">Business name</label><input class="form-input" id="bizName" type="text" placeholder="e.g. Austin HVAC Pros"></div>
+      <div class="form-group"><label class="form-label">Your phone number</label><input class="form-input" id="bizPhone" type="tel" placeholder="(512) 000-0000"></div>
+      <div class="form-group">
+        <label class="form-label">How many calls do you get per day?</label>
+        <select class="form-select" id="callsPerDay">
+          <option value="">Select...</option>
+          <option value="5">1–5 calls</option>
+          <option value="10">6–10 calls</option>
+          <option value="20">11–20 calls</option>
+          <option value="35">20+ calls</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">How many do you miss per day?</label>
+        <select class="form-select" id="missedPerDay">
+          <option value="">Select...</option>
+          <option value="1">1–2 missed</option>
+          <option value="3">3–5 missed</option>
+          <option value="7">6–10 missed</option>
+          <option value="12">10+ missed</option>
+        </select>
+      </div>
+      <button class="modal-btn" onclick="calcResult()">Show me how many jobs I'm losing →</button>
+    </div>
+    <div class="modal-step" id="step2">
+      <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div>
+      <div class="modal-step-tag">Your revenue snapshot</div>
+      <div class="modal-h" id="resultName">Here's what we found:</div>
+      <div class="result-callout">
+        <div class="result-loss" id="resultRange">$2,000 – $8,000</div>
+        <div class="result-label">Estimated monthly revenue lost to missed calls</div>
+        <div class="result-math" id="resultMath"></div>
+      </div>
+      <div class="modal-sub" style="font-size:.82rem">Based on your call volume and average trade job values in your market — not a worst-case estimate.</div>
+      <ul class="result-bullets">
+        <li>TexAgent texts back every missed caller within 30 seconds</li>
+        <li>Automated follow-up runs at 24 hours, 7 days, and 30 days</li>
+        <li>Most contractors recover 2–4 booked jobs per month in the first 30 days</li>
+      </ul>
+      <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="btn-cal">See how this works for your business →</a>
+      <p style="text-align:center;font-size:.75rem;color:var(--text-dim);margin-top:.85rem">Free 20-min call · No pressure · We'll show it live</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(e){e.preventDefault();document.getElementById('modalOverlay').classList.add('open');showStep(1)}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open')}
+function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+function showStep(n){document.querySelectorAll('.modal-step').forEach(s=>s.classList.remove('active'));document.getElementById('step'+n).classList.add('active')}
+function calcResult(){
+  const missed=parseInt(document.getElementById('missedPerDay').value)||3;
+  const biz=document.getElementById('bizName').value||'';
+  const monthlyMissed=missed*22;
+  const lowJobs=Math.round(monthlyMissed*0.15);
+  const hiJobs=Math.round(monthlyMissed*0.35);
+  const avgJob=600;
+  const low=(lowJobs*avgJob).toLocaleString();
+  const hi=(hiJobs*avgJob).toLocaleString();
+  document.getElementById('resultRange').textContent='$'+low+' – $'+hi;
+  document.getElementById('resultName').textContent=biz?biz+', here\'s what we found:':'Here\'s what we found:';
+  document.getElementById('resultMath').textContent=monthlyMissed+' missed calls/mo · '+lowJobs+'–'+hiJobs+' recoverable booked jobs · $600 avg';
+  showStep(2);
+}
+</script>
+</body>
+</html>
