@@ -167,16 +167,17 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 h1{
   font-family:var(--serif);
   font-size:clamp(3rem,6vw,4.8rem);
+  font-weight:800;
   line-height:1.02;letter-spacing:-0.03em;
   color:var(--black);margin-bottom:1.25rem;
 }
-h1 em{font-style:italic;color:var(--teal)}
+h1 em{font-style:italic;color:var(--teal);font-weight:800}
 
 .hero-sub{
-  font-size:1.15rem;font-weight:300;color:var(--dark-mid);
+  font-size:1.15rem;font-weight:400;color:var(--dark-mid);
   max-width:480px;line-height:1.75;margin-bottom:2rem;
 }
-.hero-sub strong{color:var(--black);font-weight:500}
+.hero-sub strong{color:var(--black);font-weight:600}
 
 .speed-badge{
   display:inline-flex;align-items:center;gap:.65rem;
@@ -205,23 +206,32 @@ h1 em{font-style:italic;color:var(--teal)}
   transition:all .2s;white-space:nowrap;
 }
 .btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
-.cta-micro{font-size:.72rem;color:var(--mid)}
-.demo-micro{font-size:.68rem;color:var(--mid);margin-top:.1rem}
+.cta-micro{font-size:.88rem;color:var(--dark-mid);line-height:1.5}
+.demo-micro{font-size:.88rem;color:var(--dark-mid);margin-top:.1rem;line-height:1.5}
 
 .hero-proof{
   display:flex;gap:0;padding-top:2rem;margin-top:2rem;
   border-top:1px solid var(--stone);flex-wrap:nowrap;
+  justify-content:space-between;max-width:480px;
 }
-.proof-item{display:flex;flex-direction:column;gap:2px;padding-right:1.5rem;margin-right:1.5rem;border-right:1px solid var(--stone);flex-shrink:0}
+.proof-item{
+  display:flex;flex-direction:column;gap:4px;
+  padding-right:1.5rem;margin-right:1.5rem;
+  border-right:1px solid var(--stone);flex:1;
+}
 .proof-item:last-child{border-right:none;padding-right:0;margin-right:0}
-.proof-num{font-family:var(--serif);font-size:1.75rem;color:var(--black);line-height:1;letter-spacing:-0.01em}
-.proof-label{font-size:.68rem;color:var(--mid);line-height:1.4}
+.proof-num{
+  font-family:var(--serif);font-size:2.25rem;
+  font-weight:800;color:var(--teal);
+  line-height:1;letter-spacing:-0.02em;
+}
+.proof-label{font-size:.75rem;font-weight:500;color:var(--dark-mid);line-height:1.35;}
 
 /* SMS visual */
 .hero-visual{display:flex;flex-direction:column;gap:.85rem;align-items:center}
 .phone-wrap{
   background:#1a1d24;border:2px solid #2a2e38;border-radius:28px;
-  width:230px;padding:1.25rem 1rem;box-shadow:0 24px 64px rgba(0,0,0,.2);
+  width:260px;padding:1.4rem 1.1rem;box-shadow:0 24px 64px rgba(0,0,0,.2);
 }
 .phone-notch{width:56px;height:5px;background:#0d1017;border-radius:3px;margin:0 auto .9rem}
 .phone-header{text-align:center;margin-bottom:.75rem}
@@ -238,8 +248,8 @@ h1 em{font-style:italic;color:var(--teal)}
   display:flex;align-items:center;justify-content:center;
   font-size:.65rem;color:#c8cdd8;font-weight:700;flex-shrink:0;
 }
-.mc-name{font-size:.78rem;font-weight:600;color:#e0e4ed}
-.mc-sub{font-size:.62rem;color:#8e96a8;margin-top:.05rem}
+.mc-name{font-size:.88rem;font-weight:600;color:#e0e4ed}
+.mc-sub{font-size:.72rem;color:#8e96a8;margin-top:.05rem}
 .mc-badge{
   background:rgba(239,68,68,.2);color:#fca5a5;
   font-size:.58rem;font-weight:700;padding:.12rem .38rem;
@@ -247,14 +257,14 @@ h1 em{font-style:italic;color:var(--teal)}
 }
 
 .connector{
-  display:flex;align-items:center;gap:.5rem;width:230px;
+  display:flex;align-items:center;gap:.5rem;width:260px;
 }
 .conn-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent)}
-.conn-label{font-size:.6rem;font-weight:600;color:var(--teal);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.conn-label{font-size:.62rem;font-weight:600;color:var(--teal);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
 
 .sms-wrap{
   background:#1a1d24;border:1px solid #2a2e38;border-radius:14px;
-  width:230px;overflow:hidden;
+  width:260px;overflow:hidden;
 }
 .sms-head{
   background:#14171e;padding:.55rem .8rem;
@@ -262,9 +272,9 @@ h1 em{font-style:italic;color:var(--teal)}
   border-bottom:1px solid #2a2e38;
 }
 .sms-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 2s infinite}
-.sms-head-txt{font-size:.65rem;font-weight:500;color:#8e96a8}
+.sms-head-txt{font-size:.72rem;font-weight:500;color:#8e96a8}
 .sms-body{padding:.7rem .8rem;display:flex;flex-direction:column;gap:.45rem}
-.bubble{padding:.45rem .65rem;border-radius:9px;font-size:.7rem;line-height:1.45;max-width:88%}
+.bubble{padding:.55rem .75rem;border-radius:9px;font-size:.8rem;line-height:1.45;max-width:88%}
 .b-out{background:#c0542a;color:#fff;align-self:flex-end;border-radius:9px 9px 2px 9px}
 .b-in{background:#252932;color:#c8cdd8;align-self:flex-start;border-radius:9px 9px 9px 2px}
 .sms-time{font-size:.58rem;color:#555f6e;text-align:right;margin-top:.1rem}
@@ -689,22 +699,31 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   .nav-phone-mobile{display:flex;align-items:center;gap:.35rem}
 }
 @media(max-width:640px){
-  .hero-proof{gap:0}
-  .proof-item{padding-right:1.1rem;margin-right:1.1rem}
-  .proof-num{font-size:1.55rem}
+  .hero-proof{max-width:100%;justify-content:space-between}
+  .proof-item{padding-right:.85rem;margin-right:.85rem}
+  .proof-num{font-size:2rem;color:var(--teal)}
+  .proof-label{font-size:.82rem;font-weight:500}
   .price-card{padding:1.75rem}
   .hero-cta-row{flex-direction:column;align-items:stretch}
   .hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{text-align:center}
-  /* 50% larger fonts on mobile */
+  /* phone mockup bigger on mobile */
+  .phone-wrap{width:100%;max-width:320px;padding:1.5rem 1.25rem}
+  .sms-wrap{width:100%;max-width:320px}
+  .connector{width:100%;max-width:320px}
+  .mc-name{font-size:.95rem}
+  .mc-sub{font-size:.78rem}
+  .bubble{font-size:.85rem;padding:.6rem .8rem}
+  .sms-time{font-size:.72rem}
+  .booked-label{font-size:.82rem}
+  /* 50%+ larger fonts on mobile */
   body{font-size:18px}
-  h1{font-size:clamp(2.8rem,12vw,4rem);line-height:1.03}
-  .hero-sub{font-size:1.25rem}
+  h1{font-size:clamp(2.8rem,12vw,4rem);line-height:1.03;font-weight:800}
+  .hero-sub{font-size:1.3rem}
   .hero-eyebrow{font-size:.95rem}
   .btn-primary,.btn-secondary,.nav-cta{font-size:1.1rem;padding:1.05rem 1.85rem}
-  .speed-headline{font-size:1.05rem}
-  .speed-sub{font-size:.88rem}
-  .cta-micro,.demo-micro{font-size:.88rem}
-  .proof-label{font-size:.82rem}
+  .speed-headline{font-size:1.1rem}
+  .speed-sub{font-size:.92rem}
+  .cta-micro,.demo-micro{font-size:1rem;line-height:1.6}
   .step-title{font-size:1.15rem}
   .step-desc{font-size:1rem}
   .feat-title{font-size:1.1rem}
@@ -788,7 +807,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
           <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="btn-secondary">Book a 20-min demo</a>
         </div>
         <span class="cta-micro">Takes 30 seconds. Most contractors discover $3k–$10k/month in missed jobs.</span>
-        <span class="cta-micro" style="color:var(--red);font-weight:500">⚠️ If you miss just 3 calls/day, you&apos;re likely losing $5k+/month</span>
+        <span class="cta-micro" style="color:var(--red);font-weight:600;font-size:.95rem">⚠️ If you miss just 3 calls/day, you&apos;re likely losing $5k+/month</span>
         <span class="demo-micro">Talk to a real person. No pressure.</span>
         <span class="cta-micro" style="color:var(--mid);font-style:italic">Most missed calls are &ldquo;AC not working&rdquo; or &ldquo;no cooling&rdquo; — the highest-value jobs.</span>
       </div>
