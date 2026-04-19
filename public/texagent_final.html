@@ -9,15 +9,15 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --black:#0c0c0b;
-  --white:#fafaf8;
-  --cream:#f2efe8;
-  --stone:#e4e0d8;
+  --black:#1e222a;
+  --white:#f9f8f5;
+  --cream:#f1efe9;
+  --stone:#eae8e2;
   --mid:#9a9690;
   --dark-mid:#5a5752;
-  --teal:#0d7c6e;
-  --teal-light:#e0f4f1;
-  --teal-dark:#0a6358;
+  --teal:#c0542a;
+  --teal-light:rgba(192,84,42,.1);
+  --teal-dark:#a84522;
   --gold:#c9aa6f;
   --gold-light:#f5e9cc;
   --red:#c0402a;
@@ -39,7 +39,13 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 .nav-logo{text-decoration:none;display:flex;align-items:baseline;gap:2px}
 .logo-tex{font-family:var(--serif);font-size:22px;color:var(--black);letter-spacing:-0.02em;line-height:1}
 .logo-agent{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--black);letter-spacing:0.18em;margin-bottom:1px}
-.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-right{display:flex;align-items:center;gap:1.25rem}
+.nav-phone{
+  font-size:13.5px;font-weight:500;color:var(--dark-mid);
+  text-decoration:none;white-space:nowrap;
+  transition:color .15s;display:flex;align-items:center;gap:.35rem;
+}
+.nav-phone:hover{color:var(--teal)}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
 .nav-links a{font-size:14px;color:var(--dark-mid);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--black)}
@@ -59,7 +65,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
   width:40px;height:40px;background:none;border:none;cursor:pointer;
   padding:8px;border-radius:8px;transition:background .2s;
 }
-.hamburger:hover{background:rgba(13,124,110,.08)}
+.hamburger:hover{background:rgba(192,84,42,.08)}
 .hamburger span{display:block;width:22px;height:2px;background:var(--black);border-radius:2px;transition:all .25s ease;transform-origin:center}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
@@ -109,7 +115,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
   padding:.28rem .85rem;border-radius:100px;flex-shrink:0;
   transition:background .2s;
 }
-.ind-pill:hover{background:rgba(13,124,110,.25)}
+.ind-pill:hover{background:rgba(192,84,42,.25)}
 
 /* ── HERO ── */
 .hero{
@@ -144,14 +150,15 @@ h1 em{font-style:italic;color:var(--teal)}
 
 .speed-badge{
   display:inline-flex;align-items:center;gap:.65rem;
-  background:rgba(13,124,110,.08);border:1px solid rgba(13,124,110,.2);
+  background:rgba(192,84,42,.08);border:1px solid rgba(192,84,42,.2);
   border-radius:8px;padding:.65rem 1rem;margin-bottom:1.75rem;
 }
 .speed-icon{font-size:1.1rem;line-height:1}
 .speed-headline{font-size:.88rem;font-weight:600;color:var(--teal);line-height:1.2}
-.speed-sub{font-size:.7rem;color:rgba(13,124,110,.65);font-weight:400}
+.speed-sub{font-size:.7rem;color:rgba(192,84,42,.55);font-weight:400}
 
 .hero-cta-wrap{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.hero-cta-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
 .btn-primary{
   display:inline-block;background:var(--black);color:#fff;
   padding:.9rem 2rem;border-radius:100px;
@@ -160,7 +167,16 @@ h1 em{font-style:italic;color:var(--teal)}
   transition:all .2s;
 }
 .btn-primary:hover{background:var(--teal);transform:translateY(-1px)}
+.btn-secondary{
+  display:inline-block;background:transparent;color:var(--black);
+  padding:.85rem 1.75rem;border-radius:100px;
+  font-size:.95rem;font-weight:500;text-decoration:none;
+  border:2px solid var(--stone);cursor:pointer;font-family:var(--sans);
+  transition:all .2s;white-space:nowrap;
+}
+.btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
 .cta-micro{font-size:.72rem;color:var(--mid)}
+.demo-micro{font-size:.68rem;color:var(--mid);margin-top:.1rem}
 
 .hero-proof{
   display:flex;gap:0;padding-top:2rem;margin-top:2rem;
@@ -219,7 +235,7 @@ h1 em{font-style:italic;color:var(--teal)}
 .sms-head-txt{font-size:.65rem;font-weight:500;color:#8e96a8}
 .sms-body{padding:.7rem .8rem;display:flex;flex-direction:column;gap:.45rem}
 .bubble{padding:.45rem .65rem;border-radius:9px;font-size:.7rem;line-height:1.45;max-width:88%}
-.b-out{background:#0d7c6e;color:#fff;align-self:flex-end;border-radius:9px 9px 2px 9px}
+.b-out{background:#c0542a;color:#fff;align-self:flex-end;border-radius:9px 9px 2px 9px}
 .b-in{background:#252932;color:#c8cdd8;align-self:flex-start;border-radius:9px 9px 9px 2px}
 .sms-time{font-size:.58rem;color:#555f6e;text-align:right;margin-top:.1rem}
 .booked-label{font-size:.68rem;color:var(--teal);font-weight:600;text-align:center;margin-top:.15rem}
@@ -320,7 +336,7 @@ h1 em{font-style:italic;color:var(--teal)}
   padding:.2rem .65rem;border-radius:4px;margin-top:.25rem;
 }
 .chip-bad{background:rgba(192,64,42,.15);border:1px solid rgba(192,64,42,.25);color:#f08070}
-.chip-good{background:rgba(13,124,110,.15);border:1px solid rgba(13,124,110,.25);color:#5dd4c4}
+.chip-good{background:rgba(192,84,42,.12);border:1px solid rgba(192,84,42,.25);color:#e8835c}
 
 /* ── WHAT YOU GET ── */
 .features{
@@ -397,7 +413,7 @@ h1 em{font-style:italic;color:var(--teal)}
 .numbers-reframe{
   margin-top:1.25rem;padding:1rem 1.25rem;
   border-left:3px solid var(--teal);
-  background:rgba(13,124,110,.1);border-radius:0 8px 8px 0;
+  background:rgba(192,84,42,.1);border-radius:0 8px 8px 0;
   font-size:.9rem;font-weight:500;color:#fff;line-height:1.55;
 }
 .roi-block{display:flex;flex-direction:column;gap:1rem}
@@ -406,14 +422,14 @@ h1 em{font-style:italic;color:var(--teal)}
   border-radius:var(--radius);padding:1.25rem;
 }
 .roi-card.highlight{
-  background:rgba(13,124,110,.12);
-  border-color:rgba(13,124,110,.3);
+  background:rgba(192,84,42,.12);
+  border-color:rgba(192,84,42,.3);
 }
 .roi-tag{
   font-size:.62rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
   color:rgba(255,255,255,.35);margin-bottom:.75rem;
 }
-.roi-card.highlight .roi-tag{color:rgba(13,124,110,.9)}
+.roi-card.highlight .roi-tag{color:rgba(192,84,42,.85)}
 .roi-row{
   display:flex;justify-content:space-between;
   font-size:.875rem;padding:.35rem 0;
@@ -424,7 +440,7 @@ h1 em{font-style:italic;color:var(--teal)}
   border-bottom:none;padding-top:.65rem;margin-top:.2rem;
   font-weight:600;color:#fff;
 }
-.roi-row:last-child .roi-val{color:#5dd4c4;font-size:1rem;font-weight:700}
+.roi-row:last-child .roi-val{color:#e8835c;font-size:1rem;font-weight:700}
 .roi-val{color:#fff;font-weight:500}
 .numbers-cta{
   margin-top:1rem;width:100%;padding:.85rem;border-radius:100px;
@@ -476,8 +492,8 @@ h1 em{font-style:italic;color:var(--teal)}
 .price-mo{font-size:.9rem;color:rgba(255,255,255,.4);font-weight:300}
 .price-setup{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:.6rem}
 .price-roi{
-  font-size:.82rem;font-weight:500;color:#5dd4c4;
-  background:rgba(13,124,110,.15);border:1px solid rgba(13,124,110,.25);
+  font-size:.82rem;font-weight:500;color:#e8835c;
+  background:rgba(192,84,42,.12);border:1px solid rgba(192,84,42,.25);
   padding:.4rem .85rem;border-radius:6px;display:inline-block;margin-bottom:1.5rem;
 }
 .price-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:1.5rem}
@@ -607,11 +623,11 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 }
 .modal-btn:hover{background:var(--teal)}
 .result-box{
-  background:var(--teal-light);border:1px solid rgba(13,124,110,.2);
+  background:rgba(192,84,42,.08);border:1px solid rgba(192,84,42,.25);
   border-radius:12px;padding:1.5rem;text-align:center;margin:1.25rem 0;
 }
 .result-num{font-family:var(--serif);font-size:2.25rem;color:var(--teal);letter-spacing:-0.02em;line-height:1}
-.result-label{font-size:.78rem;color:rgba(13,124,110,.75);margin-top:.3rem}
+.result-label{font-size:.78rem;color:rgba(192,84,42,.75);margin-top:.3rem}
 .result-math{font-size:.68rem;color:var(--mid);margin-top:.4rem}
 .result-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin:1.25rem 0}
 .result-bullets li{
@@ -638,11 +654,45 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 @media(max-width:960px){
   .nav-links{display:none}
   .hamburger{display:flex}
+  .nav-phone{display:none}
 }
 @media(max-width:640px){
   .hero-proof{gap:1.5rem}
   .proof-item{border-right:none;padding-right:0;margin-right:0;margin-bottom:1rem}
   .price-card{padding:1.75rem}
+  .hero-cta-row{flex-direction:column;align-items:stretch}
+  .hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{text-align:center}
+  /* 50% larger fonts on mobile */
+  body{font-size:18px}
+  h1{font-size:clamp(2.6rem,11vw,3.8rem)}
+  .hero-sub{font-size:1.2rem}
+  .hero-eyebrow{font-size:.9rem}
+  .btn-primary,.btn-secondary,.nav-cta{font-size:1.05rem;padding:1rem 1.75rem}
+  .speed-headline{font-size:1.05rem}
+  .speed-sub{font-size:.88rem}
+  .cta-micro,.demo-micro{font-size:.85rem}
+  .proof-num{font-size:2rem}
+  .proof-label{font-size:.85rem}
+  .step-title{font-size:1.1rem}
+  .step-desc{font-size:.95rem}
+  .feat-title{font-size:1.05rem}
+  .feat-desc{font-size:.92rem}
+  .loss-title{font-size:1rem}
+  .loss-desc{font-size:.9rem}
+  .math-label,.math-val{font-size:1rem}
+  .roi-row{font-size:1rem}
+  .price-name{font-size:1.85rem}
+  .price-tagline{font-size:.95rem}
+  .price-dollar{font-size:3.75rem}
+  .price-features li{font-size:1rem}
+  .trust-title{font-size:1rem}
+  .trust-desc{font-size:.9rem}
+  .section-tag{font-size:.82rem}
+  .problem-left p{font-size:1.05rem}
+  .gut p{font-size:1.1rem}
+  .final-cta p{font-size:1.1rem}
+  .ind-pill{font-size:.9rem}
+  .footer-phone{font-size:.9rem}
 }
 </style>
 </head>
@@ -656,6 +706,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
       <li><a href="#how-it-works">How it works</a></li>
       <li><a href="#pricing">Pricing</a></li>
     </ul>
+    <a href="tel:+15122600825" class="nav-phone">📞 (512) 260-0825</a>
     <a href="#" class="nav-cta" onclick="openModal(event)">Calculate my lost revenue</a>
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleDrawer()">
       <span></span><span></span><span></span>
@@ -693,9 +744,13 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
         </div>
       </div>
       <div class="hero-cta-wrap">
-        <button class="btn-primary" onclick="openModal(event)">Calculate my lost revenue →</button>
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="openModal(event)">Calculate my lost revenue →</button>
+          <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="btn-secondary">Book a 20-min demo</a>
+        </div>
         <span class="cta-micro">Takes 30 seconds. Most contractors discover $3k–$10k/month in missed jobs.</span>
         <span class="cta-micro" style="color:var(--red);font-weight:500">⚠️ If you miss just 3 calls/day, you&apos;re likely losing $5k+/month</span>
+        <span class="demo-micro">Talk to a real person. No pressure.</span>
         <span class="cta-micro" style="color:var(--mid);font-style:italic">Most missed calls are &ldquo;AC not working&rdquo; or &ldquo;no cooling&rdquo; — the highest-value jobs.</span>
       </div>
       <div class="hero-proof">
@@ -929,6 +984,11 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
           • 3+ jobs/month → this becomes a no-brainer
         </div>
         <button class="price-btn" onclick="openModal(event)">Start recovering missed calls →</button>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank"
+           style="display:block;text-align:center;margin-top:.75rem;font-size:.85rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s"
+           onmouseover="this.style.color='rgba(255,255,255,.85)'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+          Or book a demo instead →
+        </a>
         <p style="font-size:.72rem;color:rgba(255,255,255,.35);text-align:center;margin-top:.75rem">Try it for 14 days. If it doesn&apos;t start conversations, don&apos;t pay.</p>
       </div>
       <div class="trust-card fade-up" style="transition-delay:.1s">
@@ -976,12 +1036,20 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   <h2>You&apos;re already missing jobs — <em>you just don&apos;t see them.</em></h2>
   <p>In 30 seconds, you&apos;ll know exactly how much revenue you&apos;re losing every month.</p>
   <button class="btn-white" onclick="openModal(event)">Show me my lost revenue →</button>
+  <div style="margin-top:1.25rem">
+    <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank"
+       style="color:rgba(255,255,255,.65);font-size:.9rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:1px;transition:color .2s"
+       onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.65)'">
+      Or book a 20-min demo instead
+    </a>
+  </div>
   <span class="final-micro">No signup required · Free 20-min demo call</span>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo"><span class="footer-tex">Tex</span><span class="footer-agent">AGENT</span></a>
+  <p class="footer-phone">Prefer to talk? Call or text: <a href="tel:+15122600825" style="color:var(--teal);text-decoration:none">(512) 260-0825</a></p>
   <p>© 2025 TexAgent · Austin, TX · hassan@texagent.co</p>
 </footer>
 
