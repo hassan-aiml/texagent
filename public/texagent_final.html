@@ -156,7 +156,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 .hero{
   padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,4vw,3.25rem) clamp(2.5rem,6vw,5rem);
   max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;
+  display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;
   position:relative;z-index:1;
 }
 @media(max-width:820px){.hero{grid-template-columns:1fr;gap:2.5rem}}
@@ -187,12 +187,13 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
 
 .speed-badge{
   display:inline-flex;align-items:center;gap:.65rem;
-  background:rgba(192,84,42,.08);border:1px solid rgba(192,84,42,.2);
-  border-radius:8px;padding:.65rem 1rem;margin-bottom:1.75rem;
+  background:rgba(192,84,42,.14);border:1.5px solid rgba(192,84,42,.45);
+  border-radius:10px;padding:.75rem 1.15rem;margin-bottom:1.75rem;
+  box-shadow:0 2px 12px rgba(192,84,42,.1);
 }
 .speed-icon{font-size:1.1rem;line-height:1}
-.speed-headline{font-size:.88rem;font-weight:600;color:var(--teal);line-height:1.2}
-.speed-sub{font-size:.7rem;color:rgba(192,84,42,.55);font-weight:400}
+.speed-headline{font-size:.92rem;font-weight:700;color:var(--teal);line-height:1.2}
+.speed-sub{font-size:.72rem;color:rgba(192,84,42,.7);font-weight:500}
 
 .hero-cta-wrap{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
 .hero-cta-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
@@ -208,23 +209,27 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
   display:inline-block;background:transparent;color:var(--black);
   padding:.85rem 1.75rem;border-radius:100px;
   font-size:.95rem;font-weight:500;text-decoration:none;
-  border:2px solid var(--stone);cursor:pointer;font-family:var(--sans);
+  border:2px solid rgba(192,84,42,.4);cursor:pointer;font-family:var(--sans);
   transition:all .2s;white-space:nowrap;
 }
-.btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
+.btn-secondary:hover{border-color:var(--teal);background:rgba(192,84,42,.06);color:var(--teal)}
 .cta-micro{font-size:.88rem;color:var(--dark-mid);line-height:1.5}
 .demo-micro{font-size:.88rem;color:var(--dark-mid);margin-top:.1rem;line-height:1.5}
 
-.hero-proof{
-  display:flex;gap:0;padding-top:2rem;margin-top:2rem;
-  border-top:1px solid var(--stone);flex-wrap:nowrap;
-  justify-content:space-between;max-width:480px;
+.hero-proof-bar{
+  display:flex;justify-content:center;align-items:stretch;
+  padding:1.75rem clamp(1.25rem,4vw,3.25rem) 2rem;
+  border-top:1px solid var(--stone);
+  max-width:1100px;margin:0 auto;
+  gap:0;
 }
 .proof-item{
-  display:flex;flex-direction:column;gap:4px;
-  padding-right:1.5rem;margin-right:1.5rem;
-  border-right:1px solid var(--stone);flex:1;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:5px;
+  padding:0 3rem;
+  border-right:1px solid var(--stone);flex:0 0 auto;
 }
+.proof-item:last-child{border-right:none}
 .proof-item:last-child{border-right:none;padding-right:0;margin-right:0}
 .proof-num{
   font-family:var(--serif);font-size:2.25rem;
@@ -406,7 +411,7 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
 .li-red{background:rgba(192,64,42,.1)}
 .li-amber{background:rgba(201,170,111,.15)}
 .li-teal{background:var(--teal-light)}
-.loss-title{font-size:.875rem;font-weight:500;color:var(--black);margin-bottom:.2rem}
+.loss-title{font-size:.875rem;font-weight:600;color:var(--black);margin-bottom:.2rem}
 .loss-desc{font-size:.8rem;color:var(--dark-mid);line-height:1.55;font-weight:300}
 
 /* ── HOW IT WORKS ── */
@@ -480,7 +485,7 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
   display:flex;align-items:center;justify-content:center;
   font-size:1rem;margin-bottom:1rem;
 }
-.feat-title{font-size:.9rem;font-weight:500;color:var(--black);margin-bottom:.4rem}
+.feat-title{font-size:.9rem;font-weight:600;color:var(--black);margin-bottom:.4rem}
 .feat-desc{font-size:.8rem;color:var(--dark-mid);line-height:1.6;font-weight:300}
 
 /* ── NUMBERS ── */
@@ -639,7 +644,7 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
   width:36px;height:36px;border-radius:8px;background:var(--teal-light);
   display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;
 }
-.trust-title{font-size:.875rem;font-weight:500;color:var(--black);margin-bottom:.2rem}
+.trust-title{font-size:.875rem;font-weight:600;color:var(--black);margin-bottom:.2rem}
 .trust-desc{font-size:.8rem;color:var(--dark-mid);line-height:1.55;font-weight:300}
 
 /* ── FINAL CTA ── */
@@ -774,8 +779,8 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   .nav-phone-mobile{display:flex;align-items:center;gap:.35rem}
 }
 @media(max-width:640px){
-  .hero-proof{max-width:100%;justify-content:space-between}
-  .proof-item{padding-right:.85rem;margin-right:.85rem}
+  .hero-proof-bar{padding:1.5rem 1.25rem 1.75rem;justify-content:space-between}
+  .proof-item{padding:0 1rem;flex:1}
   .proof-num{font-size:2rem;color:var(--teal)}
   .proof-label{font-size:.82rem;font-weight:500}
   .price-card{padding:1.75rem}
@@ -802,18 +807,18 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   .cta-micro,.demo-micro{font-size:1rem;line-height:1.6}
   .step-title{font-size:1.15rem}
   .step-desc{font-size:1rem}
-  .feat-title{font-size:1.1rem}
-  .feat-desc{font-size:.95rem}
-  .loss-title{font-size:1.05rem}
-  .loss-desc{font-size:.92rem}
+  .feat-title{font-size:1.1rem;font-weight:700}
+  .feat-desc{font-size:.98rem}
+  .loss-title{font-size:1.1rem;font-weight:700}
+  .loss-desc{font-size:.95rem}
   .math-label,.math-val{font-size:1rem}
   .roi-row{font-size:1rem}
   .price-name{font-size:1.85rem}
   .price-tagline{font-size:.98rem}
   .price-dollar{font-size:3.75rem}
   .price-features li{font-size:1rem}
-  .trust-title{font-size:1.05rem}
-  .trust-desc{font-size:.92rem}
+  .trust-title{font-size:1.1rem;font-weight:700}
+  .trust-desc{font-size:.95rem}
   .section-tag{font-size:.85rem}
   .problem-left p{font-size:1.08rem}
   .gut p{font-size:1.1rem}
@@ -888,11 +893,6 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
         <span class="demo-micro">Talk to a real person. No pressure.</span>
         <span class="cta-micro" style="color:var(--mid);font-style:italic">Most missed calls are &ldquo;AC not working&rdquo; or &ldquo;no cooling&rdquo; — the highest-value jobs.</span>
       </div>
-      <div class="hero-proof">
-        <div class="proof-item"><span class="proof-num">30s</span><span class="proof-label">Response after missed call</span></div>
-        <div class="proof-item"><span class="proof-num">24/7</span><span class="proof-label">Even after hours</span></div>
-        <div class="proof-item"><span class="proof-num">$149</span><span class="proof-label">Flat monthly rate</span></div>
-      </div>
     </div>
 
     <div class="hero-visual fade-up" style="transition-delay:.15s">
@@ -945,13 +945,19 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
             <div class="msg-meta">Delivered &middot; 9:48 AM</div>
           </div>
           <div class="msg msg-in" id="msg4">
-            <div class="bubble-new bubble-in">Yes that works &#c0542a;</div>
+            <div class="bubble-new bubble-in">Yes that works 👍</div>
             <div class="msg-meta">9:48 AM</div>
           </div>
         </div>
         <div class="booked-badge" id="booked-badge">&#10003; Job booked &mdash; you were still on site</div>
       </div>
     </div>
+  </div>
+  <!-- Proof bar — full width, centered -->
+  <div class="hero-proof-bar">
+    <div class="proof-item"><span class="proof-num">30s</span><span class="proof-label">Response after<br>missed call</span></div>
+    <div class="proof-item"><span class="proof-num">24/7</span><span class="proof-label">Even after<br>hours</span></div>
+    <div class="proof-item"><span class="proof-num">$149</span><span class="proof-label">Flat monthly<br>rate</span></div>
   </div>
 </section>
 </div><!-- /hero-wrap -->
@@ -966,7 +972,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   <div class="problem">
     <div class="problem-left fade-up">
       <span class="section-tag">The real problem</span>
-      <h2>Most contractors don&apos;t lose calls — they lose the customer after the call</h2>
+      <h2>You&apos;re not missing calls — you&apos;re handing the leads to others</h2>
       <p>You miss a call. They call the next company. Whoever responds first gets the job. That&apos;s the whole problem.</p>
       <p>Voicemail is not a strategy. It&apos;s a polite way to say &ldquo;someone else can have this job.&rdquo;</p>
       <div class="problem-conclusion">TexAgent responds instantly — so you stay in the conversation and win the job.</div>
@@ -1164,7 +1170,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
           </div>
         </div>
         <div style="margin-top:.5rem;padding:.85rem 1rem;background:var(--stone);border-radius:8px;font-size:.78rem;color:var(--dark-mid);line-height:1.8">
-          <strong style="color:var(--black);font-weight:500;display:block;margin-bottom:.35rem">Not for everyone:</strong>
+          <strong style="color:var(--black);font-weight:700;font-size:.9rem;display:block;margin-bottom:.35rem">Not for everyone:</strong>
           • Companies that answer every call live<br>
           • Businesses that don&apos;t rely on inbound calls
         </div>
