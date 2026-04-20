@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TexAgent — Never Lose a Job From a Missed Call</title>
 <link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -147,6 +147,12 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
   background:radial-gradient(circle,rgba(192,84,42,.07) 0%,transparent 70%);
   pointer-events:none;
 }
+.hero-bg-img{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1400&q=80&auto=format&fit=crop');
+  background-size:cover;background-position:center 30%;
+  opacity:.08;pointer-events:none;
+}
 .hero{
   padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,4vw,3.25rem) clamp(2.5rem,6vw,5rem);
   max-width:1100px;margin:0 auto;
@@ -227,58 +233,127 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
 }
 .proof-label{font-size:.75rem;font-weight:500;color:var(--dark-mid);line-height:1.35;}
 
-/* SMS visual */
-.hero-visual{display:flex;flex-direction:column;gap:.85rem;align-items:center}
-.phone-wrap{
-  background:#1a1d24;border:2px solid #2a2e38;border-radius:28px;
-  width:260px;padding:1.4rem 1.1rem;box-shadow:0 24px 64px rgba(0,0,0,.2);
+/* ── HERO VISUAL — animated iPhone ── */
+.hero-visual{display:flex;flex-direction:column;align-items:center;position:relative}
+
+.phone-glow{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:320px;height:540px;
+  background:radial-gradient(ellipse,rgba(192,84,42,.14) 0%,transparent 68%);
+  pointer-events:none;z-index:0;
+  animation:glowPulse 3s ease-in-out infinite;
 }
-.phone-notch{width:56px;height:5px;background:#0d1017;border-radius:3px;margin:0 auto .9rem}
-.phone-header{text-align:center;margin-bottom:.75rem}
-.phone-time{font-size:.65rem;color:#8e96a8;margin-bottom:.15rem}
-.phone-missed{font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fca5a5}
-.mc-item{
-  background:#252932;border-radius:9px;padding:.65rem .8rem;
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:.45rem;border:1px solid #333840;
+@keyframes glowPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
+
+.iphone{
+  position:relative;z-index:1;
+  width:280px;
+  background:#0d0f14;
+  border-radius:46px;
+  padding:14px 14px 20px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 0 0 3px #111318,
+    0 0 0 4px rgba(255,255,255,.04),
+    0 40px 90px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.07);
 }
-.mc-left{display:flex;align-items:center;gap:.5rem}
-.mc-av{
-  width:30px;height:30px;border-radius:50%;background:#363c4a;
+.dynamic-island{
+  width:110px;height:32px;background:#000;border-radius:22px;
+  margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.di-cam{width:10px;height:10px;border-radius:50%;background:#1c1c1e;border:1.5px solid #2a2a2e}
+.di-dot{width:5px;height:5px;border-radius:50%;background:#c0542a;animation:blink 2s infinite}
+
+.iphone-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 8px 10px;font-size:.62rem;font-weight:600;
+  color:rgba(255,255,255,.55);
+}
+.status-time{font-size:.75rem;font-weight:700;color:#fff}
+.status-icons{display:flex;gap:5px;align-items:center;font-size:.6rem;opacity:.7}
+
+.mc-card{
+  background:linear-gradient(135deg,#1e2130,#181b25);
+  border-radius:18px;padding:.9rem 1rem;margin-bottom:10px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.mc-card-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem}
+.mc-icon-wrap{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.22);
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;
+}
+.mc-info{flex:1;min-width:0}
+.mc-caller{font-size:.82rem;font-weight:700;color:#e8ecf5;line-height:1.2}
+.mc-detail{font-size:.64rem;color:#8e96a8;margin-top:.15rem}
+.mc-time-badge{
+  font-size:.56rem;font-weight:700;color:#fca5a5;
+  background:rgba(239,68,68,.14);padding:.18rem .48rem;
+  border-radius:5px;border:1px solid rgba(239,68,68,.22);flex-shrink:0;
+}
+.mc-card-actions{display:flex;gap:.5rem}
+.mc-btn{
+  flex:1;padding:.4rem 0;border-radius:9px;
+  font-size:.6rem;font-weight:600;text-align:center;font-family:var(--sans);
+}
+.mc-btn-decline{background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-btn-callback{background:rgba(58,158,106,.12);color:#6ec48a}
+
+.iphone-divider{height:1px;background:rgba(255,255,255,.05);margin:6px 0 8px}
+
+.sms-thread{padding:0 2px}
+.sms-thread-header{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.45rem 0 .6rem;
+  border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:.6rem;
+}
+.sms-av{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:rgba(192,84,42,.18);border:1.5px solid rgba(192,84,42,.3);
   display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;color:#c8cdd8;font-weight:700;flex-shrink:0;
+  font-size:.6rem;font-weight:700;color:var(--teal);
 }
-.mc-name{font-size:.88rem;font-weight:600;color:#e0e4ed}
-.mc-sub{font-size:.72rem;color:#8e96a8;margin-top:.05rem}
-.mc-badge{
-  background:rgba(239,68,68,.2);color:#fca5a5;
-  font-size:.58rem;font-weight:700;padding:.12rem .38rem;
-  border-radius:4px;border:1px solid rgba(239,68,68,.3);
-}
+.sms-thread-name{font-size:.7rem;font-weight:700;color:#e8ecf5;line-height:1.2}
+.sms-thread-sub{font-size:.57rem;color:rgba(192,84,42,.85)}
+.sms-thread-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;margin-left:auto;flex-shrink:0}
 
-.connector{
-  display:flex;align-items:center;gap:.5rem;width:260px;
+.msg{margin-bottom:.45rem;opacity:0}
+.msg-out{display:flex;flex-direction:column;align-items:flex-end}
+.msg-in{display:flex;flex-direction:column;align-items:flex-start}
+.bubble-new{
+  padding:.52rem .78rem;border-radius:17px;
+  font-size:.72rem;line-height:1.45;max-width:92%;
+  word-break:break-word;font-family:var(--sans);
 }
-.conn-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--teal),transparent)}
-.conn-label{font-size:.62rem;font-weight:600;color:var(--teal);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.bubble-out{background:#c0542a;color:#fff;border-radius:17px 17px 4px 17px}
+.bubble-in{background:#22262f;color:#d4d9e6;border-radius:17px 17px 17px 4px}
+.msg-meta{font-size:.54rem;color:rgba(255,255,255,.22);margin-top:.18rem;padding:0 .2rem}
 
-.sms-wrap{
-  background:#1a1d24;border:1px solid #2a2e38;border-radius:14px;
-  width:260px;overflow:hidden;
+.typing-indicator{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.52rem .78rem;background:#22262f;
+  border-radius:17px 17px 17px 4px;opacity:0;
 }
-.sms-head{
-  background:#14171e;padding:.55rem .8rem;
-  display:flex;align-items:center;gap:.45rem;
-  border-bottom:1px solid #2a2e38;
+.typing-dot{
+  width:5px;height:5px;border-radius:50%;background:#6b7280;
+  animation:typingBounce 1.1s ease-in-out infinite;
 }
-.sms-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 2s infinite}
-.sms-head-txt{font-size:.72rem;font-weight:500;color:#8e96a8}
-.sms-body{padding:.7rem .8rem;display:flex;flex-direction:column;gap:.45rem}
-.bubble{padding:.55rem .75rem;border-radius:9px;font-size:.8rem;line-height:1.45;max-width:88%}
-.b-out{background:#c0542a;color:#fff;align-self:flex-end;border-radius:9px 9px 2px 9px}
-.b-in{background:#252932;color:#c8cdd8;align-self:flex-start;border-radius:9px 9px 9px 2px}
-.sms-time{font-size:.58rem;color:#555f6e;text-align:right;margin-top:.1rem}
-.booked-label{font-size:.68rem;color:var(--teal);font-weight:600;text-align:center;margin-top:.15rem}
+.typing-dot:nth-child(2){animation-delay:.18s}
+.typing-dot:nth-child(3){animation-delay:.36s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
+.booked-badge{
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  background:rgba(58,158,106,.1);border:1px solid rgba(58,158,106,.22);
+  border-radius:10px;padding:.48rem .9rem;margin-top:8px;
+  font-size:.67rem;font-weight:600;color:#6ec48a;
+  font-family:var(--sans);opacity:0;
+}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── GUT PUNCH ── */
 .gut{
@@ -707,14 +782,15 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   .hero-cta-row{flex-direction:column;align-items:stretch}
   .hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{text-align:center}
   /* phone mockup bigger on mobile */
-  .phone-wrap{width:100%;max-width:320px;padding:1.5rem 1.25rem}
-  .sms-wrap{width:100%;max-width:320px}
-  .connector{width:100%;max-width:320px}
-  .mc-name{font-size:.95rem}
-  .mc-sub{font-size:.78rem}
-  .bubble{font-size:.85rem;padding:.6rem .8rem}
-  .sms-time{font-size:.72rem}
-  .booked-label{font-size:.82rem}
+  .iphone{width:100%;max-width:300px}
+  .phone-glow{width:340px;height:560px}
+  .mc-caller{font-size:.9rem}
+  .mc-detail{font-size:.72rem}
+  .bubble-new{font-size:.82rem;padding:.6rem .85rem}
+  .sms-thread-name{font-size:.78rem}
+  .sms-thread-sub{font-size:.64rem}
+  .booked-badge{font-size:.75rem;padding:.55rem 1rem}
+  .msg-meta{font-size:.62rem}
   /* 50%+ larger fonts on mobile */
   body{font-size:18px}
   h1{font-size:clamp(2.8rem,12vw,4rem);line-height:1.03;font-weight:800}
@@ -788,6 +864,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 
 <!-- HERO -->
 <div class="hero-wrap">
+<div class="hero-bg-img"></div>
 <section>
   <div class="hero">
     <div class="hero-left fade-up">
@@ -819,54 +896,61 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
     </div>
 
     <div class="hero-visual fade-up" style="transition-delay:.15s">
-      <div class="phone-wrap">
-        <div class="phone-notch"></div>
-        <div class="phone-header">
-          <div class="phone-time">9:47 AM</div>
-          <div class="phone-missed">3 missed calls</div>
+      <div class="phone-glow"></div>
+      <div class="iphone" id="iphone">
+        <div class="dynamic-island"><div class="di-cam"></div><div class="di-dot"></div></div>
+        <div class="iphone-status">
+          <span class="status-time">9:47</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>▊</span></div>
         </div>
-        <div class="mc-item">
-          <div class="mc-left">
-            <div class="mc-av">JB</div>
-            <div><div class="mc-name">John B.</div><div class="mc-sub">AC unit not working</div></div>
+        <div class="mc-card" id="mc-card">
+          <div class="mc-card-top">
+            <div class="mc-icon-wrap">📵</div>
+            <div class="mc-info">
+              <div class="mc-caller">John B. — Missed Call</div>
+              <div class="mc-detail">AC not cooling &middot; 9:47 AM</div>
+            </div>
+            <span class="mc-time-badge">MISSED</span>
           </div>
-          <div class="mc-badge">MISSED</div>
-        </div>
-        <div class="mc-item">
-          <div class="mc-left">
-            <div class="mc-av">SR</div>
-            <div><div class="mc-name">Sarah R.</div><div class="mc-sub">Pipe burst — urgent</div></div>
+          <div class="mc-card-actions">
+            <div class="mc-btn mc-btn-decline">Decline</div>
+            <div class="mc-btn mc-btn-callback">Call Back</div>
           </div>
-          <div class="mc-badge">MISSED</div>
         </div>
+        <div class="iphone-divider"></div>
+        <div class="sms-thread">
+          <div class="sms-thread-header">
+            <div class="sms-av">TA</div>
+            <div>
+              <div class="sms-thread-name">TexAgent &middot; Auto-reply</div>
+              <div class="sms-thread-sub">&#9889; Sent 2s after missed call</div>
+            </div>
+            <div class="sms-thread-dot"></div>
+          </div>
+          <div class="msg msg-out" id="msg-typing">
+            <div class="typing-indicator" id="typing">
+              <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+            </div>
+          </div>
+          <div class="msg msg-out" id="msg1">
+            <div class="bubble-new bubble-out">Hey &mdash; this is Austin HVAC Pro. Sorry we missed your call. What&apos;s going on?</div>
+            <div class="msg-meta">Delivered &middot; 9:47 AM</div>
+          </div>
+          <div class="msg msg-in" id="msg2">
+            <div class="bubble-new bubble-in">AC stopped working. House is 85&deg;</div>
+            <div class="msg-meta">9:48 AM</div>
+          </div>
+          <div class="msg msg-out" id="msg3">
+            <div class="bubble-new bubble-out">Got it &mdash; we can get someone out today. Does 2&ndash;4pm work?</div>
+            <div class="msg-meta">Delivered &middot; 9:48 AM</div>
+          </div>
+          <div class="msg msg-in" id="msg4">
+            <div class="bubble-new bubble-in">Yes that works &#128077;</div>
+            <div class="msg-meta">9:48 AM</div>
+          </div>
+        </div>
+        <div class="booked-badge" id="booked-badge">&#10003; Job booked &mdash; you were still on site</div>
       </div>
-      <div class="connector">
-        <div class="conn-line"></div>
-        <div class="conn-label">⚡ TexAgent responds in 30s</div>
-        <div class="conn-line"></div>
-      </div>
-      <div class="sms-wrap">
-        <div class="sms-head">
-          <div class="sms-dot"></div>
-          <span class="sms-head-txt">Text conversation — automated</span>
-        </div>
-        <div class="sms-body">
-          <div>
-            <div class="bubble b-out">Hi John — this is Austin HVAC. Sorry we missed your call. Is your AC not cooling or completely out?</div>
-            <div class="sms-time">Sent automatically · 9:47 AM</div>
-          </div>
-          <div>
-            <div class="bubble b-in">AC stopped working, house is 85°. Need someone today</div>
-          </div>
-          <div>
-            <div class="bubble b-out">Got it — we can have a tech out by 2pm. Does that work?</div>
-          </div>
-          <div>
-            <div class="bubble b-in">Yes! That works perfectly</div>
-          </div>
-        </div>
-      </div>
-      <div class="booked-label">✓ Job booked — you were still on site</div>
     </div>
   </div>
 </section>
@@ -882,7 +966,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   <div class="problem">
     <div class="problem-left fade-up">
       <span class="section-tag">The real problem</span>
-      <h2>You aren&apos;t missing a call; you&apos;re handing the lead away</h2>
+      <h2>Most contractors don&apos;t lose calls — they lose the customer after the call</h2>
       <p>You miss a call. They call the next company. Whoever responds first gets the job. That&apos;s the whole problem.</p>
       <p>Voicemail is not a strategy. It&apos;s a polite way to say &ldquo;someone else can have this job.&rdquo;</p>
       <div class="problem-conclusion">TexAgent responds instantly — so you stay in the conversation and win the job.</div>
@@ -1216,6 +1300,64 @@ function closeDrawer(){
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('drawer').classList.remove('open');
 }
+
+
+// ── iPhone animation sequence ──
+function runPhoneAnimation() {
+  const typing   = document.getElementById('typing');
+  const msg1     = document.getElementById('msg1');
+  const msg2     = document.getElementById('msg2');
+  const msg3     = document.getElementById('msg3');
+  const msg4     = document.getElementById('msg4');
+  const badge    = document.getElementById('booked-badge');
+  const msgTyping = document.getElementById('msg-typing');
+
+  // Reset all
+  [msg1,msg2,msg3,msg4,badge,msgTyping].forEach(el => {
+    if(el){ el.style.opacity='0'; el.style.animation='none'; }
+  });
+  if(typing) typing.style.opacity='0';
+
+  function show(el, delay, extraStyle) {
+    setTimeout(() => {
+      if(!el) return;
+      el.style.opacity = '1';
+      el.style.animation = 'fadeSlideIn 0.4s ease forwards';
+      if(extraStyle) Object.assign(el.style, extraStyle);
+    }, delay);
+  }
+
+  // Step 1: typing indicator (t=0.6s)
+  setTimeout(() => {
+    if(msgTyping) { msgTyping.style.opacity='1'; }
+    if(typing) { typing.style.opacity='1'; }
+  }, 600);
+
+  // Step 2: msg1 outgoing (t=1.8s), hide typing
+  setTimeout(() => {
+    if(typing) typing.style.opacity='0';
+    if(msgTyping) msgTyping.style.opacity='0';
+  }, 1700);
+  show(msg1, 1800);
+
+  // Step 3: msg2 incoming (t=3.0s)
+  show(msg2, 3000);
+
+  // Step 4: msg3 outgoing (t=4.2s)
+  show(msg3, 4200);
+
+  // Step 5: msg4 incoming (t=5.4s)
+  show(msg4, 5400);
+
+  // Step 6: booked badge (t=6.4s)
+  show(badge, 6400);
+}
+
+// Run on load, then loop every 9 seconds
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(runPhoneAnimation, 400);
+  setInterval(runPhoneAnimation, 9000);
+});
 
 // Scroll animations
 const observer=new IntersectionObserver((entries)=>{
