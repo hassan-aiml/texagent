@@ -131,7 +131,7 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 
 /* ── HERO ── */
 .hero-wrap{
-  background:linear-gradient(135deg,#f9f8f5 0%,#f4ede3 45%,#ede0d4 100%);
+  background:#f9f8f5;
   border-bottom:1px solid var(--stone);
   position:relative;overflow:hidden;
 }
@@ -149,9 +149,9 @@ body{font-family:var(--sans);background:var(--white);color:var(--black);font-siz
 }
 .hero-bg-img{
   position:absolute;inset:0;z-index:0;
-  background-image:url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1400&q=80&auto=format&fit=crop');
+  background-image:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1400&q=80&auto=format&fit=crop');
   background-size:cover;background-position:center 30%;
-  opacity:.16;pointer-events:none;
+  opacity:.22;pointer-events:none;
 }
 .hero{
   padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,4vw,3.25rem) clamp(2.5rem,6vw,5rem);
@@ -585,10 +585,19 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
   line-height:1.1;letter-spacing:-0.02em;color:var(--black);margin-bottom:2.75rem;
 }
 .price-card-wrap{
-  display:grid;grid-template-columns:minmax(0,520px) minmax(0,420px);
-  gap:1.25rem;max-width:960px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;max-width:1100px;
 }
-@media(max-width:760px){.price-card-wrap{grid-template-columns:1fr}}
+@media(max-width:900px){.price-card-wrap{grid-template-columns:1fr}}
+.price-card.featured{border:2px solid var(--teal);position:relative}
+.price-card.featured::before{
+  content:'Most Popular';position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--teal);color:#fff;font-size:.6rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:.25rem .85rem;border-radius:20px;
+  white-space:nowrap;
+}
+.price-card.base{border:2px solid rgba(255,255,255,.1)}
+.price-card.enterprise{border:2px solid rgba(255,255,255,.1)}
 .price-card{
   background:var(--black);border-radius:20px;padding:2.25rem;
   display:flex;flex-direction:column;position:relative;
@@ -870,8 +879,10 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <div class="ind-bar">
   <span class="ind-bar-label">Built for</span>
   <div class="ind-pill">🔧 HVAC contractors</div>
-  <div class="ind-pill">❄️ Heating &amp; cooling service companies</div>
-  <div class="ind-pill">🏠 Residential HVAC teams</div>
+  <div class="ind-pill">⚡ Electricians</div>
+  <div class="ind-pill">🪠 Plumbers</div>
+  <div class="ind-pill">🏠 Roofers</div>
+  <div class="ind-pill">🧰 Home service contractors</div>
 </div>
 
 <!-- HERO -->
@@ -880,14 +891,14 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <section>
   <div class="hero">
     <div class="hero-left fade-up">
-      <div class="hero-eyebrow"><span class="hero-dot"></span>HVAC missed call recovery</div>
-      <h1>Never lose an HVAC job from a <em>missed call.</em></h1>
-      <p class="hero-sub">When someone&apos;s AC is out, they don&apos;t wait — they call the next company. TexAgent texts every missed HVAC call in <strong>under 30 seconds</strong> so you stay first.</p>
+      <div class="hero-eyebrow"><span class="hero-dot"></span>Missed call recovery for contractors</div>
+      <h1>Never lose a job from a <em>missed call.</em></h1>
+      <p class="hero-sub">When a homeowner needs help, they don&apos;t leave voicemails — they call the next contractor. TexAgent texts every missed call in <strong>under 30 seconds</strong> so you stay first.</p>
       <div class="speed-badge">
         <span class="speed-icon">⚡</span>
         <div>
           <div class="speed-headline">Responds in under 30 seconds</div>
-          <div class="speed-sub">Automatically — while you&apos;re on the job</div>
+          <div class="speed-sub">While you&apos;re on a job, on a roof, or under a sink</div>
         </div>
       </div>
       <div class="hero-cta-wrap">
@@ -898,7 +909,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
         <span class="cta-micro">Takes 30 seconds. Most contractors discover $3k–$10k/month in missed jobs.</span>
         <span class="cta-micro" style="color:var(--red);font-weight:600;font-size:.95rem">⚠️ If you miss just 3 calls/day, you&apos;re likely losing $5k+/month</span>
         <span class="demo-micro">Talk to a real person. No pressure.</span>
-        <span class="cta-micro" style="color:var(--mid);font-style:italic">Most missed calls are &ldquo;AC not working&rdquo; or &ldquo;no cooling&rdquo; — the highest-value jobs.</span>
+        <span class="cta-micro" style="color:var(--mid);font-style:italic">Emergency calls — burst pipes, power outages, roof leaks — are the highest-value jobs. Don&apos;t miss them.</span>
       </div>
     </div>
 
@@ -915,7 +926,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
             <div class="mc-icon-wrap">📵</div>
             <div class="mc-info">
               <div class="mc-caller">John B. — Missed Call</div>
-              <div class="mc-detail">AC not cooling &middot; 9:47 AM</div>
+              <div class="mc-detail">Urgent service call &middot; 9:47 AM</div>
             </div>
             <span class="mc-time-badge">MISSED</span>
           </div>
@@ -940,11 +951,11 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
             </div>
           </div>
           <div class="msg msg-out" id="msg1">
-            <div class="bubble-new bubble-out">Hey &mdash; this is Austin HVAC Pro. Sorry we missed your call. What&apos;s going on?</div>
+            <div class="bubble-new bubble-out">Hey &mdash; this is Austin Home Services. Sorry we missed your call. What&apos;s going on?</div>
             <div class="msg-meta">Delivered &middot; 9:47 AM</div>
           </div>
           <div class="msg msg-in" id="msg2">
-            <div class="bubble-new bubble-in">AC stopped working. House is 85&deg;</div>
+            <div class="bubble-new bubble-in">Pipe burst under the sink, water everywhere</div>
             <div class="msg-meta">9:48 AM</div>
           </div>
           <div class="msg msg-out" id="msg3">
@@ -979,7 +990,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
   <div class="problem">
     <div class="problem-left fade-up">
       <span class="section-tag">The real problem</span>
-      <h2>You&apos;re not missing calls — you&apos;re handing the leads to others</h2>
+      <h2>You&apos;re not missing calls — you&apos;re sending leads straight to your competitors</h2>
       <p>You miss a call. They call the next company. Whoever responds first gets the job. That&apos;s the whole problem.</p>
       <p>Voicemail is not a strategy. It&apos;s a polite way to say &ldquo;someone else can have this job.&rdquo;</p>
       <div class="problem-conclusion">TexAgent responds instantly — so you stay in the conversation and win the job.</div>
@@ -988,7 +999,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
       <div class="loss-item">
         <div class="loss-icon li-red">📵</div>
         <div>
-          <div class="loss-title">You miss a call → they call the next company</div>
+          <div class="loss-title">You miss a call → they call the next contractor</div>
           <div class="loss-desc">Every unanswered call is a potential job handed directly to your competitor. They&apos;re not waiting.</div>
         </div>
       </div>
@@ -1046,7 +1057,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
     <div class="features-grid">
       <div class="feat fade-up">
         <div class="feat-icon" style="background:var(--teal-light)">⚡</div>
-        <div class="feat-title">Texts every missed call in 30 seconds</div>
+        <div class="feat-title">Texts every missed call back in 30 seconds</div>
         <div class="feat-desc">Before they have a chance to call your competitor. Every single time.</div>
       </div>
       <div class="feat fade-up" style="transition-delay:.07s">
@@ -1077,7 +1088,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <section class="numbers">
   <div class="numbers-inner">
     <span class="section-tag">The math</span>
-    <h2 class="fade-up">What missed calls are costing you</h2>
+    <h2 class="fade-up">What every missed call is costing you</h2>
     <div class="numbers-grid">
       <div class="fade-up">
         <div class="math-block">
@@ -1115,39 +1126,68 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
     <span class="section-tag">Simple pricing</span>
-    <h2 class="fade-up">One plan. No contracts. No setup fee.</h2>
+    <h2 class="fade-up">Simple pricing. No contracts. No setup fee.</h2>
     <div class="price-card-wrap">
-      <div class="price-card fade-up">
-        <div class="price-tier">TexAgent Starter</div>
+      <!-- STARTER -->
+      <div class="price-card base fade-up">
+        <div class="price-tier">Starter</div>
         <div class="price-name">Never lose a job from a missed call</div>
-        <div class="price-tagline">If you miss calls, this pays for itself in days.</div>
+        <div class="price-tagline">For solo operators and small crews.</div>
         <div class="price-amount"><span class="price-dollar">$149</span><span class="price-mo">/month</span></div>
         <div class="price-setup">No setup fee · Cancel anytime</div>
-        <div class="price-roi">💡 Pays for itself with just one recovered job</div>
         <hr class="price-divider">
         <ul class="price-features">
-          <li>Instant SMS reply to every missed call — within 30 seconds</li>
-          <li>Works 24/7, including evenings and weekends</li>
-          <li>Starts a real conversation with your caller automatically</li>
-          <li>You get notified the moment someone responds</li>
+          <li>SMS auto-reply to every missed call within 30 seconds</li>
+          <li>Works 24/7 including evenings &amp; weekends</li>
+          <li>Instant lead notification to your phone</li>
           <li>Weekly performance summary</li>
-          <li>Setup included — we configure everything for you</li>
+          <li>Setup included</li>
         </ul>
-        <div style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem;line-height:1.8;padding:.85rem 1rem;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.07)">
-          If you miss just:<br>
-          • 1 job/month → you break even<br>
-          • 2 jobs/month → you profit<br>
-          • 3+ jobs/month → this becomes a no-brainer
-        </div>
-        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center">Book a 20-min demo →</a>
-        <button onclick="openModal(event)"
-           style="width:100%;background:transparent;border:none;cursor:pointer;font-family:var(--sans);padding:.65rem;margin-top:.5rem;font-size:.82rem;color:rgba(255,255,255,.4);transition:color .2s;text-align:center"
-           onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
-          Or calculate my lost revenue first
-        </button>
-        <p style="font-size:.72rem;color:rgba(255,255,255,.35);text-align:center;margin-top:.5rem">Try it for 14 days. If it doesn&apos;t start conversations, don&apos;t pay.</p>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Book a demo →</a>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">14-day free trial · No credit card required</p>
       </div>
-      <div class="trust-card fade-up" style="transition-delay:.1s">
+
+      <!-- GROWTH -->
+      <div class="price-card featured fade-up" style="transition-delay:.08s">
+        <div class="price-tier">Growth</div>
+        <div class="price-name">Convert more leads. Follow up automatically.</div>
+        <div class="price-tagline">For growing contractors who want more booked jobs.</div>
+        <div class="price-amount"><span class="price-dollar">$299</span><span class="price-mo">/month</span></div>
+        <div class="price-setup">No setup fee · Cancel anytime</div>
+        <div class="price-roi">💡 Most popular for 3–10 person teams</div>
+        <hr class="price-divider">
+        <ul class="price-features">
+          <li>Everything in Starter</li>
+          <li>Automated follow-up sequences (2, 24, 48 hrs)</li>
+          <li>Job booking link sent in conversation</li>
+          <li>Lead dashboard — see every conversation</li>
+          <li>Custom SMS templates for your trade</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Book a demo →</a>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">14-day free trial · No credit card required</p>
+      </div>
+
+      <!-- VOICE + AI -->
+      <div class="price-card enterprise fade-up" style="transition-delay:.16s">
+        <div class="price-tier">Voice + AI</div>
+        <div class="price-name">Answer every call. Book every job. Automatically.</div>
+        <div class="price-tagline">For established contractors who want full automation.</div>
+        <div class="price-amount"><span class="price-dollar">$499</span><span class="price-mo">/month</span></div>
+        <div class="price-setup">Setup fee applies · Onboarding included</div>
+        <hr class="price-divider">
+        <ul class="price-features">
+          <li>Everything in Growth</li>
+          <li>AI voice agent answers missed calls live</li>
+          <li>Qualifies lead, captures job details by voice</li>
+          <li>Books appointments directly into your calendar</li>
+          <li>Call transcripts &amp; summaries sent to you</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Talk to us →</a>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">Custom onboarding · Contact for details</p>
+      </div>
+      <div class="trust-card fade-up" style="transition-delay:.2s;grid-column:1/-1">
         <div class="trust-item">
           <div class="trust-icon">🚀</div>
           <div>
@@ -1172,8 +1212,8 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
         <div class="trust-item">
           <div class="trust-icon">📍</div>
           <div>
-            <div class="trust-title">Built for Austin contractors</div>
-            <div class="trust-desc">We&apos;re local. We understand your market and how your customers behave.</div>
+            <div class="trust-title">Built for local contractors</div>
+            <div class="trust-desc">HVAC, plumbing, electrical, roofing — if you rely on inbound calls, this is for you.</div>
           </div>
         </div>
         <div style="margin-top:.5rem;padding:.85rem 1rem;background:var(--stone);border-radius:8px;font-size:.78rem;color:var(--dark-mid);line-height:1.8">
@@ -1218,7 +1258,7 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
       <span class="modal-tag">Step 1 of 2</span>
       <div class="modal-h">Tell us about your call volume</div>
       <div class="modal-sub">We&apos;ll show you exactly how many jobs you&apos;re likely losing every month from missed calls.</div>
-      <div class="form-group"><label class="form-label">Business name</label><input class="form-input" id="bizName" type="text" placeholder="e.g. Austin HVAC Pros"></div>
+      <div class="form-group"><label class="form-label">Business name</label><input class="form-input" id="bizName" type="text" placeholder="e.g. Austin Home Services"></div>
       <div class="form-group"><label class="form-label">Your phone number</label><input class="form-input" id="bizPhone" type="tel" placeholder="(512) 000-0000"></div>
       <div class="form-group">
         <label class="form-label">How many calls do you get per day?</label>
