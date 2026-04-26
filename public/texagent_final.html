@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TexAgent — Never Lose a Job From a Missed Call</title>
+<meta name="description" content="TexAgent automatically texts back every missed call within 30 seconds — so HVAC, electrical, plumbing, and roofing contractors never lose a job to a competitor. Starting at $149/mo.">
+<meta name="keywords" content="missed call recovery, HVAC contractor software, electrician CRM, plumber lead recovery, roofing contractor tools, home service SMS automation, contractor missed call text back">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://texagent.co/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://texagent.co/">
+<meta property="og:title" content="TexAgent — Never Lose a Job From a Missed Call">
+<meta property="og:description" content="TexAgent texts back every missed call in 30 seconds. Built for HVAC, electrical, plumbing, and roofing contractors. Never lose a lead to a competitor again.">
+<meta property="og:site_name" content="TexAgent">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TexAgent — Never Lose a Job From a Missed Call">
+<meta name="twitter:description" content="Automatic SMS reply to every missed call within 30 seconds. Built for home service contractors. $149/mo.">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet">
 <style>
@@ -585,19 +599,10 @@ h1 em{font-style:italic;color:var(--teal);font-weight:800}
   line-height:1.1;letter-spacing:-0.02em;color:var(--black);margin-bottom:2.75rem;
 }
 .price-card-wrap{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.25rem;max-width:1100px;
+  display:grid;grid-template-columns:minmax(0,520px) minmax(0,420px);
+  gap:1.25rem;max-width:960px;
 }
-@media(max-width:900px){.price-card-wrap{grid-template-columns:1fr}}
-.price-card.featured{border:2px solid var(--teal);position:relative}
-.price-card.featured::before{
-  content:'Most Popular';position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-  background:var(--teal);color:#fff;font-size:.6rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;padding:.25rem .85rem;border-radius:20px;
-  white-space:nowrap;
-}
-.price-card.base{border:2px solid rgba(255,255,255,.1)}
-.price-card.enterprise{border:2px solid rgba(255,255,255,.1)}
+@media(max-width:760px){.price-card-wrap{grid-template-columns:1fr}}
 .price-card{
   background:var(--black);border-radius:20px;padding:2.25rem;
   display:flex;flex-direction:column;position:relative;
@@ -1126,68 +1131,39 @@ footer p{font-size:.75rem;color:rgba(255,255,255,.2)}
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
     <span class="section-tag">Simple pricing</span>
-    <h2 class="fade-up">Simple pricing. No contracts. No setup fee.</h2>
+    <h2 class="fade-up">One plan. No contracts. No setup fee.</h2>
     <div class="price-card-wrap">
-      <!-- STARTER -->
-      <div class="price-card base fade-up">
-        <div class="price-tier">Starter</div>
+      <div class="price-card fade-up">
+        <div class="price-tier">TexAgent Starter</div>
         <div class="price-name">Never lose a job from a missed call</div>
-        <div class="price-tagline">For solo operators and small crews.</div>
+        <div class="price-tagline">If you miss calls, this pays for itself in days.</div>
         <div class="price-amount"><span class="price-dollar">$149</span><span class="price-mo">/month</span></div>
         <div class="price-setup">No setup fee · Cancel anytime</div>
+        <div class="price-roi">💡 Pays for itself with just one recovered job</div>
         <hr class="price-divider">
         <ul class="price-features">
-          <li>SMS auto-reply to every missed call within 30 seconds</li>
-          <li>Works 24/7 including evenings &amp; weekends</li>
-          <li>Instant lead notification to your phone</li>
+          <li>Instant SMS reply to every missed call — within 30 seconds</li>
+          <li>Works 24/7, including evenings and weekends</li>
+          <li>Starts a real conversation with your caller automatically</li>
+          <li>You get notified the moment someone responds</li>
           <li>Weekly performance summary</li>
-          <li>Setup included</li>
+          <li>Setup included — we configure everything for you</li>
         </ul>
-        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Book a demo →</a>
-        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">14-day free trial · No credit card required</p>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem;line-height:1.8;padding:.85rem 1rem;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.07)">
+          If you miss just:<br>
+          &bull; 1 job/month &rarr; you break even<br>
+          &bull; 2 jobs/month &rarr; you profit<br>
+          &bull; 3+ jobs/month &rarr; this becomes a no-brainer
+        </div>
+        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center">Book a 20-min demo &rarr;</a>
+        <button onclick="openModal(event)"
+           style="width:100%;background:transparent;border:none;cursor:pointer;font-family:var(--sans);padding:.65rem;margin-top:.5rem;font-size:.82rem;color:rgba(255,255,255,.4);transition:color .2s;text-align:center"
+           onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">
+          Or calculate my lost revenue first
+        </button>
+        <p style="font-size:.72rem;color:rgba(255,255,255,.35);text-align:center;margin-top:.5rem">Try it for 14 days. If it doesn&apos;t start conversations, don&apos;t pay.</p>
       </div>
-
-      <!-- GROWTH -->
-      <div class="price-card featured fade-up" style="transition-delay:.08s">
-        <div class="price-tier">Growth</div>
-        <div class="price-name">Convert more leads. Follow up automatically.</div>
-        <div class="price-tagline">For growing contractors who want more booked jobs.</div>
-        <div class="price-amount"><span class="price-dollar">$299</span><span class="price-mo">/month</span></div>
-        <div class="price-setup">No setup fee · Cancel anytime</div>
-        <div class="price-roi">💡 Most popular for 3–10 person teams</div>
-        <hr class="price-divider">
-        <ul class="price-features">
-          <li>Everything in Starter</li>
-          <li>Automated follow-up sequences (2, 24, 48 hrs)</li>
-          <li>Job booking link sent in conversation</li>
-          <li>Lead dashboard — see every conversation</li>
-          <li>Custom SMS templates for your trade</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Book a demo →</a>
-        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">14-day free trial · No credit card required</p>
-      </div>
-
-      <!-- VOICE + AI -->
-      <div class="price-card enterprise fade-up" style="transition-delay:.16s">
-        <div class="price-tier">Voice + AI</div>
-        <div class="price-name">Answer every call. Book every job. Automatically.</div>
-        <div class="price-tagline">For established contractors who want full automation.</div>
-        <div class="price-amount"><span class="price-dollar">$499</span><span class="price-mo">/month</span></div>
-        <div class="price-setup">Setup fee applies · Onboarding included</div>
-        <hr class="price-divider">
-        <ul class="price-features">
-          <li>Everything in Growth</li>
-          <li>AI voice agent answers missed calls live</li>
-          <li>Qualifies lead, captures job details by voice</li>
-          <li>Books appointments directly into your calendar</li>
-          <li>Call transcripts &amp; summaries sent to you</li>
-          <li>Dedicated account manager</li>
-        </ul>
-        <a href="https://cal.com/hassan-hai-jegppt/30min" target="_blank" class="price-btn" style="text-decoration:none;display:block;text-align:center;margin-top:auto">Talk to us →</a>
-        <p style="font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:.65rem">Custom onboarding · Contact for details</p>
-      </div>
-      <div class="trust-card fade-up" style="transition-delay:.2s;grid-column:1/-1">
+      <div class="trust-card fade-up" style="transition-delay:.1s">
         <div class="trust-item">
           <div class="trust-icon">🚀</div>
           <div>
